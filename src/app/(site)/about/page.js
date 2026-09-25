@@ -78,7 +78,7 @@ export default async function AboutPage() {
             <h1 className="mt-3 font-bebas text-6xl leading-[0.9] tracking-wide text-white md:text-8xl lg:text-9xl">
               Built around
               <br />
-              the right car.
+              the right car.a
             </h1>
           </div>
         </div>
