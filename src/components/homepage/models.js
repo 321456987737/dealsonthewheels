@@ -159,7 +159,7 @@ export default function ModelsSection() {
                     href={`/models/${model.id}`}
                     className="group inline-flex items-center gap-3 border border-white bg-white px-6 py-3.5 font-montserrat text-[9px] font-medium uppercase tracking-[0.2em] text-black transition-all duration-300 hover:bg-transparent hover:text-white md:px-7 md:py-4"
                   >
-                    Explore model
+                    Explore models
 
                     <ArrowUpRight
                       size={14}
