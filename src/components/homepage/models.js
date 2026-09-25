@@ -108,7 +108,7 @@ export default function ModelsSection() {
       ====================================================== */}
 
       <div className="mx-auto max-w-[1800px] px-6 md:px-10 lg:px-14">
-        <div className="grid min-h-[72dvh] grid-cols-1 lg:grid-cols-[0.85fr_1.15fr]">
+        <div className="grid min-h-[72vh] grid-cols-1 lg:grid-cols-[0.85fr_1.15fr]">
           {/* ==================================================
               LEFT CONTENT
           ================================================== */}
@@ -189,7 +189,7 @@ export default function ModelsSection() {
               RIGHT IMAGE
           ================================================== */}
 
-          <div className="relative flex min-h-[10dvh]  items-center justify-center overflow-hidden lg:min-h-0 max-h-[70dvh]">
+          <div className="relative flex min-h-[10vh]  items-center justify-center overflow-hidden lg:min-h-0 max-h-[70vh]">
             <AnimatePresence mode="wait">
               <motion.div
                 key={model.id}
@@ -225,7 +225,7 @@ export default function ModelsSection() {
                   height={1100}
                   priority={activeModel === 0}
                   sizes="(max-width: 1024px) 100vw, 60vw"
-                  className="relative z-10 md:h-auto h-[20dvh]  w-[92%] object-contain md:w-[85%] lg:w-[100%] "
+                  className="relative z-10 md:h-auto h-[20vh]  w-[92%] object-contain md:w-[85%] lg:w-[100%] "
                 />
               </motion.div>
             </AnimatePresence>
