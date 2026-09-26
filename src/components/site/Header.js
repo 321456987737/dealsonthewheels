@@ -109,10 +109,10 @@ export default function Header() {
                   key={link.href}
                   href={link.href}
                   aria-current={active ? "page" : undefined}
-                  className={`group relative py-1 font-montserrat text-sm font-medium transition ${
+                  className={`group relative py-1 font-montserrat text-sm  transition ${
                     active
-                      ? "text-white"
-                      : "text-white/65 hover:text-white"
+                      ? "text-white font-medium"
+                      : "text-white/65 hover:text-white  "
                   }`}
                 >
                   {link.label}
