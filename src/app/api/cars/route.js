@@ -7,13 +7,13 @@ import Car from "@/models/Car";
 export async function GET(request) {
   try {
     await connectDB();
-
+    console.log(123)
     const { searchParams } = new URL(request.url);
 
     /* ======================================================
         PAGINATION
     ====================================================== */
-
+   console.log(123)
     const page = Math.max(
       Number(searchParams.get("page")) || 1,
       1
@@ -26,7 +26,7 @@ export async function GET(request) {
       ),
       50
     );
-
+   console.log(123)
     /* ======================================================
         BASIC FILTERS
     ====================================================== */
@@ -99,7 +99,7 @@ export async function GET(request) {
     /* ======================================================
         FILTER
     ====================================================== */
-
+   console.log(123)
     const filter = {};
 
     /* STATUS */
@@ -171,7 +171,7 @@ export async function GET(request) {
     /* ======================================================
         PRICE RANGE
     ====================================================== */
-
+   console.log(123)
     if (
       Number.isFinite(minPrice) ||
       Number.isFinite(maxPrice)
@@ -190,7 +190,7 @@ export async function GET(request) {
     /* ======================================================
         YEAR RANGE
     ====================================================== */
-
+   console.log(123)
     if (
       Number.isFinite(minYear) ||
       Number.isFinite(maxYear)
@@ -246,7 +246,7 @@ export async function GET(request) {
     ====================================================== */
 
     const skip = (page - 1) * limit;
-
+   console.log(123)
     /* ======================================================
         DATABASE QUERY
     ====================================================== */
@@ -292,7 +292,7 @@ export async function GET(request) {
     /* ======================================================
         RESPONSE
     ====================================================== */
-
+   console.log(123)
     return NextResponse.json(
       {
         success: true,
