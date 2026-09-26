@@ -235,9 +235,9 @@ export default function CarsBrowser({
 
   const fetchCarsRef = useRef(null);
 
-//  useEffect(() => {
+ useEffect(() => {
   paginationRef.current = pagination;
-// }, [pagination]);
+}, [pagination]);
 
 
   /* ======================================================
@@ -663,9 +663,9 @@ export default function CarsBrowser({
     This lets the mount effect run ONLY ONCE.
   */
 
-//  useEffect(() => {
+ useEffect(() => {
   fetchCarsRef.current = fetchCars;
-// }, [fetchCars]);
+}, [fetchCars]);
 
   /* ======================================================
       INITIAL API CALL
