@@ -20,7 +20,7 @@ import { AnimatePresence, motion } from "framer-motion";
 
 const HERO_IMAGE = "/images/inventoryimages/Mercedes-AMG GT.webp";
 
-const PAGE_SIZE = 6;
+const PAGE_SIZE = 1;
 
 const BODY_TYPES = [
   "Sedan",

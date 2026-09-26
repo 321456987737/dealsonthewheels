@@ -70,7 +70,7 @@ async function getLatestCars(currentCarId) {
    PAGE
 ============================================================ */
 
-export default async function CarDetailsPage({ params }) {
+export default async function Page({ params }) {
   const { id } = await params;
 
   const data = await getCar(id);
