@@ -159,43 +159,77 @@ export default async function CarDetailsPage({ params }) {
             {/* ==================================================
                 IMAGE GALLERY
             ================================================== */}
+{/* ==================================================
+    IMAGE GALLERY
+================================================== */}
 
-            <div>
-              {images.length > 0 ? (
-                <div className="grid gap-3 md:grid-cols-2">
-                  {images.slice(0, 5).map((image, index) => (
-                    <div
-                      key={`${image.publicId}-${index}`}
-                      className={`relative overflow-hidden bg-[#f1f1ef] ${
-                        index === 0
-                          ? "aspect-[16/10] md:col-span-2"
-                          : "aspect-[4/3]"
-                      }`}
-                    >
-                      <img
-                        src={image.url}
-                        alt={image.alt || `${car.make} ${car.model}`}
-                        className="h-full w-full object-cover transition-transform duration-700 hover:scale-[1.015]"
-                      />
+<div>
+  {images.length > 0 ? (
+    <div className="space-y-3">
+      {/* MAIN IMAGE */}
+      <div className="relative aspect-[16/9] overflow-hidden bg-[#f1f1ef]">
+        <img
+          src={images[0].url}
+          alt={
+            images[0].alt ||
+            `${car.make} ${car.model}`
+          }
+          className="h-full w-full object-cover transition-transform duration-700 hover:scale-[1.015]"
+        />
 
-                      {index === 0 && (
-                        <div className="absolute left-4 top-4">
-                          <span className="bg-white px-3 py-2 font-montserrat text-[9px] font-medium uppercase tracking-[0.16em] text-black md:text-[10px]">
-                            {car.condition}
-                          </span>
-                        </div>
-                      )}
-                    </div>
-                  ))}
-                </div>
-              ) : (
-                <div className="flex aspect-[16/10] items-center justify-center bg-[#f1f1ef]">
-                  <span className="font-montserrat text-[10px] uppercase tracking-[0.22em] text-black/25 md:text-[11px]">
-                    No images available
-                  </span>
-                </div>
-              )}
+        {/* CONDITION */}
+        <div className="absolute left-4 top-4">
+          <span className="bg-white px-3 py-2 font-montserrat text-[9px] font-medium uppercase tracking-[0.16em] text-black md:text-[10px]">
+            {car.condition}
+          </span>
+        </div>
+
+        {/* IMAGE COUNT */}
+        {/* {images.length > 1 && (
+          <div className="absolute bottom-4 right-4">
+            <span className="bg-black/70 px-3 py-2 font-montserrat text-[9px] uppercase tracking-[0.16em] text-white backdrop-blur-sm md:text-[10px]">
+              01 / {String(images.length).padStart(2, "0")}
+            </span>
+          </div>
+        )} */}
+      </div>
+
+      {/* SMALL IMAGES */}
+      {images.length > 1 && (
+        <div className="grid grid-cols-2 gap-3">
+          {images.slice(1).map((image, index) => (
+            <div
+              key={`${image.publicId}-${index + 1}`}
+              className="relative aspect-[4/3] overflow-hidden bg-[#f1f1ef]"
+            >
+              <img
+                src={image.url}
+                alt={
+                  image.alt ||
+                  `${car.make} ${car.model} image ${index + 2}`
+                }
+                className="h-full w-full object-cover transition-transform duration-700 hover:scale-[1.025]"
+              />
+
+              {/* IMAGE NUMBER */}
+              {/* <div className="absolute bottom-3 left-3">
+                <span className="bg-black/60 px-2.5 py-1.5 font-montserrat text-[8px] tracking-[0.18em] text-white backdrop-blur-sm md:text-[9px]">
+                  {String(index + 2).padStart(2, "0")}
+                </span>
+              </div> */}
             </div>
+          ))}
+        </div>
+      )}
+    </div>
+  ) : (
+    <div className="flex aspect-[16/9] items-center justify-center bg-[#f1f1ef]">
+      <span className="font-montserrat text-[10px] uppercase tracking-[0.22em] text-black/25 md:text-[11px]">
+        No images available
+      </span>
+    </div>
+  )}
+</div>
 
             {/* ==================================================
                 VEHICLE INFORMATION

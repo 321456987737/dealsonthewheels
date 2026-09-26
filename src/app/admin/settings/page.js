@@ -1,6 +1,7 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import Image from "next/image";
+import { useCallback, useEffect, useState } from "react";
 
 const DAYS = [
   ["monday", "Monday"],
@@ -58,11 +59,7 @@ export default function AdminSettingsPage() {
   const [success, setSuccess] =
     useState("");
 
-  useEffect(() => {
-    loadSettings();
-  }, []);
-
-  async function loadSettings() {
+  const loadSettings = useCallback(async () => {
     try {
       setLoading(true);
       setError("");
@@ -88,7 +85,14 @@ export default function AdminSettingsPage() {
       }
 
       const business =
-        result.data.business;
+        result.data?.settings ??
+        result.data?.business;
+
+      if (!business) {
+        throw new Error(
+          "No settings data returned"
+        );
+      }
 
       setForm({
         name: business.name || "",
@@ -192,7 +196,13 @@ export default function AdminSettingsPage() {
     } finally {
       setLoading(false);
     }
-  }
+  }, []);
+
+  useEffect(() => {
+    // This is an intentional initial fetch in a client component.
+    // eslint-disable-next-line react-hooks/set-state-in-effect
+    void loadSettings();
+  }, [loadSettings]);
 
   function handleChange(event) {
     const {
@@ -459,10 +469,13 @@ export default function AdminSettingsPage() {
 
             {form.heroImage && (
               <div className="overflow-hidden rounded-2xl border border-black/10 bg-black/[0.03]">
-                <img
+                <Image
                   src={form.heroImage}
                   alt="Dealership hero preview"
-                  className="aspect-[16/6] w-full object-cover"
+                  width={1200}
+                  height={675}
+                  unoptimized
+                  className="aspect-[16/6] h-auto w-full object-cover"
                   onError={(event) => {
                     event.currentTarget.style.display =
                       "none";

@@ -783,7 +783,7 @@ export default function CarsBrowser({
               ) : cars.length > 0 ? (
                 <>
                   <AnimatePresence mode="popLayout">
-                    <div className="grid gap-x-5 gap-y-10 sm:grid-cols-2 xl:grid-cols-3">
+                   <div className="grid grid-cols-2 gap-x-3 gap-y-8 sm:gap-x-5 sm:gap-y-10 xl:grid-cols-3">
                       {cars.map((car, index) => (
                         <InventoryCard
                           key={car._id}
@@ -1131,13 +1131,13 @@ function InventoryCard({
 
           <div className="absolute inset-0 bg-gradient-to-t from-black/25 via-transparent to-transparent opacity-0 transition-opacity duration-500 group-hover:opacity-100" />
 
-          <div className="absolute left-4 top-4">
+          <div className="absolute md:left-4  md:top-4 top-1 left-1">
             <span className="bg-white px-3 py-2 font-montserrat text-[8px] font-medium uppercase tracking-[0.16em] text-black">
               {car.condition}
             </span>
           </div>
 
-          <div className="absolute bottom-4 right-4 flex h-10 w-10 items-center justify-center bg-white text-black transition-all duration-300 group-hover:bg-black group-hover:text-white">
+          <div className="absolute md:bottom-4 md:right-4 bottom-1 right-1 flex md:h-10 md:w-10 w-6 h-6 items-center justify-center bg-white text-black transition-all duration-300 group-hover:bg-black group-hover:text-white">
             <ArrowUpRight
               size={16}
               strokeWidth={1.3}
@@ -1340,7 +1340,7 @@ function EmptyState({
 
 function LoadingGrid() {
   return (
-    <div className="grid gap-x-5 gap-y-10 sm:grid-cols-2 xl:grid-cols-3">
+   <div className="grid grid-cols-2 gap-x-3 gap-y-8 sm:gap-x-5 sm:gap-y-10 xl:grid-cols-3">
       {Array.from({
         length: 6,
       }).map((_, index) => (

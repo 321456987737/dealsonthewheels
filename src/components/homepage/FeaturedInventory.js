@@ -425,7 +425,7 @@ export default function FeaturedInventory() {
                 duration: 0.25,
                 ease: [0.22, 1, 0.36, 1],
               }}
-              className="flex items-center justify-center gap-4 border-t border-black/10 py-5 font-montserrat text-lg uppercase tracking-[0.18em] text-black/40 md:py-6 md:text-[10px]"
+              className="flex items-center justify-center gap-4 border-t border-black/10 py-5 font-montserrat text-lg uppercase tracking-[0.18em] text-black/40 md:py-6 md:text-[10px] text-[9px] md:text-start text-center"
             >
               <span>{activeCar.description}</span>
             </motion.div>

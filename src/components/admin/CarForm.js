@@ -6,6 +6,7 @@ import { useRouter } from "next/navigation";
 
 const BODY_TYPES = [
   "Sedan",
+  "Roadster",
   "SUV",
   "Coupe",
   "Convertible",
