@@ -20,7 +20,7 @@ import { AnimatePresence, motion } from "framer-motion";
 
 const HERO_IMAGE = "/images/inventoryimages/Mercedes-AMG GT.webp";
 
-const PAGE_SIZE = 1;
+const PAGE_SIZE = 6;
 
 const BODY_TYPES = [
   "Sedan",
@@ -235,7 +235,10 @@ export default function CarsBrowser({
 
   const fetchCarsRef = useRef(null);
 
+ useEffect(() => {
   paginationRef.current = pagination;
+}, [pagination]);
+
 
   /* ======================================================
       BUILD API PARAMS
@@ -660,7 +663,9 @@ export default function CarsBrowser({
     This lets the mount effect run ONLY ONCE.
   */
 
+ useEffect(() => {
   fetchCarsRef.current = fetchCars;
+}, [fetchCars]);
 
   /* ======================================================
       INITIAL API CALL

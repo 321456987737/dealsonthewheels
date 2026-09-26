@@ -3,7 +3,7 @@ import { notFound } from "next/navigation";
 import { ArrowUpRight, MapPin, MessageCircle, Phone } from "lucide-react";
 
 async function getCar(id) {
-  const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || "http://localhost:3000";
+  const baseUrl = process.env.NEXT_PUBLIC_SITE_URL ;
 
   try {
     const response = await fetch(`${baseUrl}/api/cars/${id}`, {
