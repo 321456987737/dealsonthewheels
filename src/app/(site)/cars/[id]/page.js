@@ -108,7 +108,7 @@ export default async function CarDetailsPage({ params }) {
       {/* ======================================================
           01 — BREADCRUMB
       ====================================================== */}
-    <div className="bg-[#181818] h-20 w-full"/>
+    <div className="bg-[#181818] h-18 w-full"/>
       <div className="border-b border-black/10">
         <div className="mx-auto flex max-w-[1800px] items-center justify-between px-6 py-5 md:px-10 lg:px-14">
           <div className="flex items-center gap-2 font-montserrat text-[10px] uppercase tracking-[0.17em] text-black/35 md:text-[11px]">
