@@ -115,7 +115,7 @@ export default function CarsBrowser({
   const [pagination, setPagination] = useState(
     initialPagination || {
       page: 1,
-      limit: 12,
+      limit: 2,
       total: 0,
       totalPages: 0,
       hasNextPage: false,
@@ -266,7 +266,7 @@ export default function CarsBrowser({
     }
 
     params.set("page", String(page));
-    params.set("limit", "12");
+    params.set("limit", "2");
 
     return params;
   }
@@ -301,7 +301,7 @@ export default function CarsBrowser({
       setPagination(
         result.data.pagination || {
           page: 1,
-          limit: 12,
+          limit: 2,
           total: 0,
           totalPages: 0,
           hasNextPage: false,

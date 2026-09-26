@@ -5,7 +5,7 @@ import Car from "@/models/Car";
 export async function GET(request) {
   try {
     await connectDB();
-
+    console.log(1)
     const { searchParams } = new URL(request.url);
 
     const search =
@@ -25,15 +25,16 @@ export async function GET(request) {
       Number(searchParams.get("page")) || 1,
       1
     );
-
+    console.log(page,"age")
+    console.log(2)
     const limit = Math.min(
       Math.max(
-        Number(searchParams.get("limit")) || 15,
+        Number(searchParams.get("limit")) || 2,
         1
       ),
       50
     );
-
+console.log(3)
     const filter = {};
 
     if (status) {
@@ -56,7 +57,7 @@ export async function GET(request) {
         { stockNumber: regex },
       ];
     }
-
+console.log(4)
     const sortOptions = {
       newest: {
         createdAt: -1,
@@ -91,7 +92,7 @@ export async function GET(request) {
       sortOptions[sort] || sortOptions.newest;
 
     const skip = (page - 1) * limit;
-
+console.log(5)
     const [cars, total] = await Promise.all([
       Car.find(filter)
         .select(
@@ -108,7 +109,7 @@ export async function GET(request) {
     const totalPages = Math.ceil(
       total / limit
     );
-
+console.log(6)
     return NextResponse.json({
       success: true,
       data: {
