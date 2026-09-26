@@ -74,7 +74,7 @@ export default function HeroSection() {
   const activeSlide = slides[selectedIndex];
 
   return (
-    <section className="relative h-[100dvh] min-h-[650px] w-full overflow-hidden bg-[#181818] text-white">
+    <section className="relative md:h-[100dvh] h-[70vh] md:min-h-[650px] w-full overflow-hidden bg-[#181818] text-white">
       {/* ==================== SLIDER ==================== */}
       <div ref={emblaRef} className="h-full overflow-hidden">
         <div className="flex h-full">
@@ -218,7 +218,7 @@ export default function HeroSection() {
         </div>
 
         {/* ==================== PERMANENT PROGRESS ==================== */}
-        <div className="absolute bottom-[120px] left-5 md:bottom-24 md:left-8">
+        <div className="absolute bottom-[20px] left-5 md:bottom-24 md:left-8">
           <div className="flex items-center gap-3">
             <motion.span
               key={selectedIndex}
@@ -252,7 +252,7 @@ export default function HeroSection() {
         </div>
 
         {/* ==================== ARROWS ==================== */}
-        <div className="pointer-events-auto absolute bottom-[120px] right-5 flex items-center gap-2 md:bottom-24 md:right-8">
+        <div className="pointer-events-auto absolute bottom-[20px] right-5 flex items-center gap-2 md:bottom-24 md:right-8">
           <button
             type="button"
             onClick={scrollPrev}
