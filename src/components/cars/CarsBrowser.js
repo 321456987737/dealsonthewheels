@@ -957,7 +957,15 @@ export default function CarsBrowser({
                 {pagination.total}{" "}
                 {pagination.total === 1 ? "vehicle" : "vehicles"} available
               </p> */}
+<div className="flex flex-col gap-0.5">
+  <span className="font-montserrat text-[9px] uppercase tracking-[0.2em] text-black/35">
+    {pagination.total}
+  </span>
 
+  <span className="font-montserrat text-[9px] uppercase tracking-[0.2em] text-black/35">
+    {pagination.total === 1 ? "vehicle" : "vehicles"} available
+  </span>
+</div>
               {loading && cars.length > 0 && (
                 <span className="font-montserrat text-[8px] uppercase tracking-[0.15em] text-black/30">
                   Updating...
