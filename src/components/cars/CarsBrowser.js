@@ -1127,7 +1127,7 @@ export default function CarsBrowser({
 
             {/* INVENTORY CONTENT */}
 
-            <div className="min-w-0">
+            {/* <div className="min-w-0">
               {error && (
                 <div className="mb-8 border border-black/10 bg-black/[0.02] p-5">
                   <p className="font-montserrat text-[9px] uppercase tracking-[0.16em] text-black/50">
@@ -1140,11 +1140,11 @@ export default function CarsBrowser({
                 <LoadingGrid />
               ) : cars.length > 0 ? (
                 <>
-                  {/* <div className="grid grid-cols-2 gap-x-3 gap-y-8 sm:gap-x-5 sm:gap-y-10 xl:grid-cols-3">
+                  <div className="grid grid-cols-2 gap-x-3 gap-y-8 sm:gap-x-5 sm:gap-y-10 xl:grid-cols-3">
                     {cars.map((car, index) => (
                       <InventoryCard key={car._id} car={car} index={index} />
                     ))}
-                  </div> */}
+                  </div>
 
                   <div
                     ref={sentinelRef}
@@ -1165,7 +1165,7 @@ export default function CarsBrowser({
               ) : (
                 <EmptyState onReset={resetFilters} />
               )}
-            </div>
+            </div> */}
           </div>
         </div>
       </section>
