@@ -952,20 +952,20 @@ export default function CarsBrowser({
       <section className="bg-white">
         <div className="mx-auto max-w-[1800px] px-6 py-10 md:px-10 md:py-12 lg:px-14 lg:py-14">
           <div className="mb-8 flex items-center justify-between gap-1 border-b border-black/10 pb-5">
-            <div className="flex items-center gap-3">
+            <div className="flex flex-col items-center gap-3">
               {/* <p className="font-montserrat text-[9px] uppercase tracking-[0.2em] text-black/35">
                 {pagination.total}{" "}
                 {pagination.total === 1 ? "vehicle" : "vehicles"} available
               </p> */}
-<div className="flex flex-col gap-0.5">
-  <span className="font-montserrat text-[9px] uppercase tracking-[0.2em] text-black/35">
-    {pagination.total}
-  </span>
+              <div className="flex flex-col gap-0.5">
+                <span className="font-montserrat text-[9px] uppercase tracking-[0.2em] text-black/35">
+                  {pagination.total}
+                </span>
 
-  <span className="font-montserrat text-[9px] uppercase tracking-[0.2em] text-black/35">
-    {pagination.total === 1 ? "vehicle" : "vehicles"} available
-  </span>
-</div>
+                <span className="font-montserrat text-[9px] uppercase tracking-[0.2em] text-black/35">
+                  {pagination.total === 1 ? "vehicle" : "vehicles"} available
+                </span>
+              </div>
               {loading && cars.length > 0 && (
                 <span className="font-montserrat text-[8px] uppercase tracking-[0.15em] text-black/30">
                   Updating...
