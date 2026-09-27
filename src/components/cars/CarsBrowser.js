@@ -1035,7 +1035,7 @@ export default function CarsBrowser({
 
             {/* MOBILE FILTER */}
 
-            <AnimatePresence>
+            {/* <AnimatePresence>
               {mobileFiltersOpen && (
                 <>
                   <motion.div
@@ -1123,11 +1123,11 @@ export default function CarsBrowser({
                   </motion.aside>
                 </>
               )}
-            </AnimatePresence>
+            </AnimatePresence> */}
 
             {/* INVENTORY CONTENT */}
 
-            {/* <div className="min-w-0">
+            <div className="min-w-0">
               {error && (
                 <div className="mb-8 border border-black/10 bg-black/[0.02] p-5">
                   <p className="font-montserrat text-[9px] uppercase tracking-[0.16em] text-black/50">
@@ -1165,7 +1165,7 @@ export default function CarsBrowser({
               ) : (
                 <EmptyState onReset={resetFilters} />
               )}
-            </div> */}
+            </div>
           </div>
         </div>
       </section>
