@@ -46,7 +46,7 @@ export default function AdminLoginPage() {
   }
 
   return (
-    <main className="z-[100] flex h-full w-full items-center justify-center  bg-[#f5f5f2] px-5">
+    <main className="z-[100] overflow-y-auto flex h-full w-full items-center justify-center  bg-[#f5f5f2] px-5">
       <div className="w-full max-w-[440px]">
         <div className="rounded-[28px] border border-black/10 bg-white p-6 shadow-[0_20px_70px_rgba(0,0,0,0.07)] sm:p-8">
           {/* BRAND */}
@@ -62,7 +62,7 @@ export default function AdminLoginPage() {
             </p>
 
             <h1 className="mt-3 text-3xl font-semibold tracking-tight text-[#181818]">
-              Welcome back
+              Welcome back.
             </h1>
 
             <p className="mx-auto mt-2 max-w-xs text-sm leading-6 text-black/45">
