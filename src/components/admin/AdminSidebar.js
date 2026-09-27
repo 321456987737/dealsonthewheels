@@ -25,10 +25,10 @@ const navigation = [
     label: "Test Drives",
     href: "/admin/test-drives",
   },
-  {
-    label: "Settings",
-    href: "/admin/settings",
-  },
+  // {
+  //   label: "Settings",
+  //   href: "/admin/settings",
+  // },
 ];
 
 export default function AdminSidebar() {
