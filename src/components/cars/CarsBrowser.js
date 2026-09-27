@@ -952,18 +952,22 @@ export default function CarsBrowser({
       <section className="bg-white">
         <div className="mx-auto max-w-[1800px] px-6 py-10 md:px-10 md:py-12 lg:px-14 lg:py-14">
           <div className="mb-8 flex items-center justify-between gap-1 border-b border-black/10 pb-5">
-            {/* <div className="flex items-center gap-3">
-              <p className="font-montserrat text-[9px] uppercase tracking-[0.2em] text-black/35">
-                {pagination.total}{" "}
-                {pagination.total === 1 ? "vehicle" : "vehicles"} available
-              </p>
+          <div className="flex min-h-[16px] items-center gap-3">
+  <p className="whitespace-nowrap font-montserrat text-[9px] uppercase tracking-[0.2em] text-black/35">
+    {pagination.total}{" "}
+    {pagination.total === 1 ? "vehicle" : "vehicles"} available
+  </p>
 
-              {loading && cars.length > 0 && (
-                <span className="font-montserrat text-[8px] uppercase tracking-[0.15em] text-black/30">
-                  Updating...
-                </span>
-              )}
-            </div> */}
+  <span
+    className={`whitespace-nowrap font-montserrat text-[8px] uppercase tracking-[0.15em] text-black/30 transition-opacity duration-200 ${
+      loading && cars.length > 0
+        ? "opacity-100"
+        : "pointer-events-none opacity-0"
+    }`}
+  >
+    Updating...
+  </span>
+</div>
 
             <div className="flex items-center gap-3">
               <button
