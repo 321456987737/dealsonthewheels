@@ -90,7 +90,7 @@ export default async function CarsPage({
   }
 
   return (
-    <main className="min-h-screen bg-white">
+    <main className=" bg-white">
       <CarsBrowser
         initialCars={data.cars}
         initialPagination={data.pagination}

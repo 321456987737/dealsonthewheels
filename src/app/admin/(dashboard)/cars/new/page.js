@@ -3,7 +3,7 @@ import CarForm from "@/components/admin/CarForm";
 
 export default function NewCarPage() {
   return (
-    <div className="mx-auto max-w-5xl">
+    <div className="mx-auto max-w-5xl md:pb-0 pb-20">
       <div className="mb-8">
         <Link
           href="/admin/cars"
