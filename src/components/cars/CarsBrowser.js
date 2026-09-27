@@ -1140,22 +1140,11 @@ export default function CarsBrowser({
                 <LoadingGrid />
               ) : cars.length > 0 ? (
                 <>
-                  <div className="grid grid-cols-2 gap-x-3 gap-y-8 sm:gap-x-5 sm:gap-y-10 xl:grid-cols-3">
+                  {/* <div className="grid grid-cols-2 gap-x-3 gap-y-8 sm:gap-x-5 sm:gap-y-10 xl:grid-cols-3">
                     {cars.map((car, index) => (
                       <InventoryCard key={car._id} car={car} index={index} />
                     ))}
-                  </div>
-
-                  {/* ==================================================
-                      INFINITE SCROLL SENTINEL
-
-                      IMPORTANT:
-                      Keep this element mounted.
-
-                      The observer can now reconnect after every
-                      pagination/loading change without depending
-                      on conditional DOM creation.
-                  ================================================== */}
+                  </div> */}
 
                   <div
                     ref={sentinelRef}
