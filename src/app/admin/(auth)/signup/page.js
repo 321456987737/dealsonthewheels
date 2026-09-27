@@ -83,7 +83,7 @@ export default function AdminSignupPage() {
   }
 
   return (
-    <main className=" z-[100] overflow-y-auto h-full flex  w-full items-center justify-center  bg-[#f5f5f2] px-5 py-6">
+    <main className=" z-[100] overflow-y-auto min-h-screen h-full flex  w-full items-center justify-center  bg-[#f5f5f2] px-5 py-6">
       <div className="w-full max-w-2xl">
         <div className="rounded-[28px] border border-black/10 bg-white p-6 shadow-[0_20px_70px_rgba(0,0,0,0.07)] sm:p-8 md:p-9">
           {/* HEADER */}

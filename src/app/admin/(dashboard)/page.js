@@ -59,7 +59,7 @@ export default function AdminDashboardPage() {
   const stats = data?.stats;
 
   return (
-    <div className="mx-auto max-w-7xl">
+    <div className="mx-auto max-w-7xl md:pb-0 pb-20">
       <div className="mb-8">
         <p className="text-xs font-semibold uppercase tracking-[0.2em] text-black/35">
           Overview
@@ -81,7 +81,7 @@ export default function AdminDashboardPage() {
       )}
 
       {/* Main Stats */}
-      <div className="grid gap-4 sm:grid-cols-2 xl:grid-cols-4">
+      <div className="grid gap-4 grid-cols-2 xl:grid-cols-4">
         <StatCard
           title="Total Cars"
           value={
@@ -120,7 +120,7 @@ export default function AdminDashboardPage() {
       </div>
 
       {/* Secondary Stats */}
-      <div className="mt-4 grid gap-4 sm:grid-cols-2 xl:grid-cols-4">
+      <div className="mt-4 grid gap-4 grid-cols-2 xl:grid-cols-4">
         <MiniStat
           title="Reserved Cars"
           value={
@@ -166,7 +166,7 @@ export default function AdminDashboardPage() {
           </h2>
         </div>
 
-        <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+        <div className="grid gap-4 grid-cols-2 lg:grid-cols-4">
           <QuickAction
             href="/admin/cars/new"
             title="Add Car"

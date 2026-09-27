@@ -67,44 +67,26 @@ export default function CarForm({ initialData = null }) {
 
     return {
       stockNumber: initialData.stockNumber || "",
-
       make: initialData.make || "",
-
       model: initialData.model || "",
-
       year: initialData.year ? String(initialData.year) : "",
-
       price: initialData.price !== undefined ? String(initialData.price) : "",
-
       currency: initialData.currency || "USD",
-
       mileage:
         initialData.mileage !== undefined ? String(initialData.mileage) : "",
-
       mileageUnit: initialData.mileageUnit || "km",
-
       transmission: initialData.transmission || "Automatic",
-
       fuelType: initialData.fuelType || "Petrol",
-
       bodyType: initialData.bodyType || "SUV",
-
       condition: initialData.condition || "Used",
-
       exteriorColor: initialData.exteriorColor || "",
-
       interiorColor: initialData.interiorColor || "",
-
       engine: initialData.engine || "",
-
       description: initialData.description || "",
-
       features: Array.isArray(initialData.features)
         ? initialData.features.join("\n")
         : "",
-
       status: initialData.status || "Available",
-
       isFeatured: Boolean(initialData.isFeatured),
     };
   });
@@ -118,25 +100,17 @@ export default function CarForm({ initialData = null }) {
       .filter((image) => image && image.url)
       .map((image, index) => ({
         id: image.publicId || `existing-${index}-${image.url}`,
-
         url: image.url,
-
         publicId: image.publicId || "",
-
         alt: image.alt || "",
-
         isExisting: true,
-
         file: null,
-
         preview: image.url,
       }));
   });
 
   const [submitting, setSubmitting] = useState(false);
-
   const [error, setError] = useState("");
-
   const [success, setSuccess] = useState("");
 
   const previewUrls = useRef(new Set());
@@ -175,7 +149,6 @@ export default function CarForm({ initialData = null }) {
 
     if (remainingSlots <= 0) {
       setError(`You can upload a maximum of ${MAX_IMAGES} images.`);
-
       return;
     }
 
@@ -187,7 +160,6 @@ export default function CarForm({ initialData = null }) {
 
     if (invalidFile) {
       setError("Only JPG, PNG and WebP images are allowed.");
-
       return;
     }
 
@@ -195,7 +167,6 @@ export default function CarForm({ initialData = null }) {
 
     if (tooLarge) {
       setError("Each image must be smaller than 10MB.");
-
       return;
     }
 
@@ -221,17 +192,11 @@ export default function CarForm({ initialData = null }) {
 
         return {
           id: `${file.name}-${file.lastModified}-${file.size}`,
-
           file,
-
           preview,
-
           url: "",
-
           publicId: "",
-
           alt: file.name,
-
           isExisting: false,
         };
       });
@@ -357,9 +322,10 @@ export default function CarForm({ initialData = null }) {
       }
 
       /*
-       * Existing images that were removed
+       * Existing images removed
        * from the edit form.
        */
+
       const originalPublicIds = isEdit
         ? (initialData.images || [])
             .map((image) => image.publicId)
@@ -378,6 +344,7 @@ export default function CarForm({ initialData = null }) {
       /*
        * Upload new files first.
        */
+
       setSuccess("Uploading images...");
 
       const uploadedImages = await uploadNewImages();
@@ -389,16 +356,14 @@ export default function CarForm({ initialData = null }) {
       let uploadedIndex = 0;
 
       /*
-       * Preserve the exact order selected
-       * by the admin.
+       * Preserve exact image order.
        */
+
       const finalImages = images.map((image) => {
         if (image.isExisting) {
           return {
             url: image.url,
-
             publicId: image.publicId,
-
             alt: image.alt || `${form.year} ${form.make} ${form.model}`,
           };
         }
@@ -409,9 +374,7 @@ export default function CarForm({ initialData = null }) {
 
         return {
           url: uploaded.url,
-
           publicId: uploaded.publicId,
-
           alt: `${form.year} ${form.make} ${form.model}`,
         };
       });
@@ -473,11 +436,9 @@ export default function CarForm({ initialData = null }) {
 
       const response = await fetch(endpoint, {
         method,
-
         headers: {
           "Content-Type": "application/json",
         },
-
         body: JSON.stringify(payload),
       });
 
@@ -492,13 +453,10 @@ export default function CarForm({ initialData = null }) {
       let cleanupWarning = "";
 
       /*
-       * Delete old Cloudinary assets that the
-       * admin removed while editing.
-       *
-       * This happens AFTER the database update
-       * so we never remove an image before the
-       * new car state is saved.
+       * Delete old Cloudinary assets
+       * after successful DB update.
        */
+
       if (removedPublicIds.length > 0) {
         try {
           await deleteCloudinaryImages(removedPublicIds);
@@ -524,10 +482,10 @@ export default function CarForm({ initialData = null }) {
       console.error("Car form submit error:", submitError);
 
       /*
-       * If MongoDB create/update failed after
-       * Cloudinary upload succeeded, clean up
-       * those newly uploaded assets.
+       * Clean newly uploaded Cloudinary
+       * assets if database save failed.
        */
+
       if (newlyUploadedPublicIds.length > 0) {
         try {
           await deleteCloudinaryImages(newlyUploadedPublicIds);
@@ -545,25 +503,39 @@ export default function CarForm({ initialData = null }) {
   }
 
   return (
-    <form onSubmit={handleSubmit} className="space-y-8">
+    <form
+      onSubmit={handleSubmit}
+      className="w-full min-w-0 space-y-5 pb-24 sm:space-y-6 lg:space-y-8"
+    >
+      {/* =====================================================
+          ERROR
+      ====================================================== */}
+
       {error && (
-        <div className="rounded-2xl border border-red-200 bg-red-50 p-5 text-sm leading-6 text-red-700">
+        <div className="rounded-2xl border border-red-200 bg-red-50 p-4 text-sm leading-6 text-red-700 sm:p-5">
           {error}
         </div>
       )}
 
+      {/* =====================================================
+          SUCCESS
+      ====================================================== */}
+
       {success && (
-        <div className="rounded-2xl border border-green-200 bg-green-50 p-5 text-sm leading-6 text-green-700">
+        <div className="rounded-2xl border border-green-200 bg-green-50 p-4 text-sm leading-6 text-green-700 sm:p-5">
           {success}
         </div>
       )}
 
-      {/* Basic information */}
+      {/* =====================================================
+          BASIC INFORMATION
+      ====================================================== */}
+
       <FormSection
         title="Basic information"
         description="Enter the main information customers will see about this vehicle."
       >
-        <div className="grid gap-5 md:grid-cols-2">
+        <div className="grid min-w-0 gap-5 sm:grid-cols-2">
           <InputField
             label="Make"
             name="make"
@@ -604,12 +576,15 @@ export default function CarForm({ initialData = null }) {
         </div>
       </FormSection>
 
-      {/* Pricing */}
+      {/* =====================================================
+          PRICING
+      ====================================================== */}
+
       <FormSection
         title="Pricing & mileage"
         description="Set the vehicle price and mileage information."
       >
-        <div className="grid gap-5 md:grid-cols-3">
+        <div className="grid min-w-0 gap-5 sm:grid-cols-2 lg:grid-cols-3">
           <InputField
             label="Price"
             name="price"
@@ -629,7 +604,7 @@ export default function CarForm({ initialData = null }) {
             options={["USD", "QAR", "AED", "SAR", "EUR", "GBP"]}
           />
 
-          <div className="grid grid-cols-2 gap-3">
+          <div className="grid min-w-0 grid-cols-2 gap-3">
             <InputField
               label="Mileage"
               name="mileage"
@@ -651,12 +626,15 @@ export default function CarForm({ initialData = null }) {
         </div>
       </FormSection>
 
-      {/* Specifications */}
+      {/* =====================================================
+          SPECIFICATIONS
+      ====================================================== */}
+
       <FormSection
         title="Vehicle specifications"
         description="Add the specifications customers can use to compare vehicles."
       >
-        <div className="grid gap-5 md:grid-cols-2 lg:grid-cols-3">
+        <div className="grid min-w-0 gap-5 sm:grid-cols-2 lg:grid-cols-3">
           <SelectField
             label="Body type"
             name="bodyType"
@@ -715,7 +693,10 @@ export default function CarForm({ initialData = null }) {
         </div>
       </FormSection>
 
-      {/* Description */}
+      {/* =====================================================
+          DESCRIPTION
+      ====================================================== */}
+
       <FormSection
         title="Description"
         description="Write the description that will appear on the vehicle details page."
@@ -727,11 +708,14 @@ export default function CarForm({ initialData = null }) {
           rows={7}
           maxLength={5000}
           placeholder="Tell customers about this vehicle, its condition, history and notable details..."
-          className="w-full resize-y rounded-xl border border-black/15 px-4 py-4 text-sm leading-6 outline-none transition placeholder:text-black/30 focus:border-black"
+          className="w-full min-w-0 resize-y rounded-xl border border-black/15 px-4 py-3.5 text-sm leading-6 outline-none transition placeholder:text-black/30 focus:border-black sm:px-4 sm:py-4"
         />
       </FormSection>
 
-      {/* Features */}
+      {/* =====================================================
+          FEATURES
+      ====================================================== */}
+
       <FormSection
         title="Features & equipment"
         description="Enter one feature per line."
@@ -746,24 +730,31 @@ Leather seats
 360° camera
 Adaptive cruise control
 Panoramic roof`}
-          className="w-full resize-y rounded-xl border border-black/15 px-4 py-4 text-sm leading-6 outline-none placeholder:text-black/30 focus:border-black"
+          className="w-full min-w-0 resize-y rounded-xl border border-black/15 px-4 py-3.5 text-sm leading-6 outline-none placeholder:text-black/30 focus:border-black sm:px-4 sm:py-4"
         />
       </FormSection>
 
-      {/* Images */}
+      {/* =====================================================
+          IMAGES
+      ====================================================== */}
+
       <FormSection
         title="Vehicle images"
         description={`Upload up to ${MAX_IMAGES} images. The first image is used as the primary vehicle image.`}
       >
-        <div className="space-y-6">
-          <label className="flex min-h-36 cursor-pointer flex-col items-center justify-center rounded-2xl border border-dashed border-black/20 bg-black/[0.02] px-6 py-8 text-center transition hover:border-black hover:bg-black/[0.035]">
-            <div className="flex h-12 w-12 items-center justify-center rounded-full bg-black text-lg font-semibold text-white">
+        <div className="space-y-5">
+          {/* Upload */}
+
+          <label className="flex min-h-32 cursor-pointer flex-col items-center justify-center rounded-2xl border border-dashed border-black/20 bg-black/[0.02] px-4 py-7 text-center transition hover:border-black hover:bg-black/[0.035] sm:min-h-36 sm:px-6 sm:py-8">
+            <div className="flex h-11 w-11 items-center justify-center rounded-full bg-black text-lg font-semibold text-white sm:h-12 sm:w-12">
               +
             </div>
 
-            <p className="mt-4 text-sm font-semibold">Choose vehicle images</p>
+            <p className="mt-3 text-sm font-semibold sm:mt-4">
+              Choose vehicle images
+            </p>
 
-            <p className="mt-1 text-xs text-black/40">
+            <p className="mt-1 text-[11px] leading-5 text-black/40 sm:text-xs">
               JPG, PNG or WebP · Maximum 10MB each
             </p>
 
@@ -776,7 +767,9 @@ Panoramic roof`}
             />
           </label>
 
-          <div className="flex items-center justify-between gap-4">
+          {/* Image counter */}
+
+          <div className="flex flex-col gap-1 sm:flex-row sm:items-center sm:justify-between sm:gap-4">
             <p className="text-xs text-black/45">
               {images.length} / {MAX_IMAGES} images selected
             </p>
@@ -788,74 +781,163 @@ Panoramic roof`}
             )}
           </div>
 
+          {/* =================================================
+              RESPONSIVE IMAGE GALLERY
+          ================================================== */}
+
           {images.length > 0 && (
-            <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-              {images.map((image, index) => (
-                <div
-                  key={image.id}
-                  className="overflow-hidden rounded-2xl border border-black/10 bg-white"
-                >
-                  <div className="relative aspect-[4/3] overflow-hidden bg-black/[0.04]">
-                    <img
-                      src={image.preview}
-                      alt={image.alt || `${form.make} ${form.model}`}
-                      className="h-full w-full object-cover"
-                    />
+            <div className="grid min-w-0 gap-3 lg:grid-cols-[minmax(0,1.7fr)_minmax(280px,1fr)]">
+              {/* =================================================
+                  PRIMARY IMAGE
+              ================================================== */}
 
-                    <div className="absolute left-3 top-3 rounded-full bg-white px-3 py-1.5 text-[11px] font-semibold shadow-sm">
-                      {index === 0 ? "Primary" : `Image ${index + 1}`}
-                    </div>
+              <div className="min-w-0 overflow-hidden rounded-2xl border border-black/10 bg-white">
+                <div className="relative aspect-[4/3] overflow-hidden bg-black/[0.04] sm:aspect-[16/10] lg:aspect-[4/3]">
+                  <img
+                    src={images[0].preview}
+                    alt={images[0].alt || `${form.make} ${form.model}`}
+                    className="h-full w-full object-cover"
+                  />
 
-                    {image.isExisting && (
-                      <div className="absolute right-3 top-3 rounded-full bg-black px-3 py-1.5 text-[11px] font-semibold text-white">
-                        Saved
-                      </div>
-                    )}
+                  {/* Primary */}
+
+                  <div className="absolute left-3 top-3 rounded-full bg-white px-3 py-1.5 text-[10px] font-semibold shadow-sm sm:text-[11px]">
+                    Primary image
                   </div>
 
-                  <div className="flex items-center justify-between gap-2 p-3">
-                    <div className="flex gap-2">
-                      <button
-                        type="button"
-                        disabled={index === 0 || submitting}
-                        onClick={() => moveImage(index, "left")}
-                        className="rounded-lg border border-black/10 px-3 py-2 text-xs font-semibold disabled:cursor-not-allowed disabled:opacity-30"
-                      >
-                        ←
-                      </button>
+                  {/* Saved */}
 
-                      <button
-                        type="button"
-                        disabled={index === images.length - 1 || submitting}
-                        onClick={() => moveImage(index, "right")}
-                        className="rounded-lg border border-black/10 px-3 py-2 text-xs font-semibold disabled:cursor-not-allowed disabled:opacity-30"
-                      >
-                        →
-                      </button>
+                  {images[0].isExisting && (
+                    <div className="absolute right-3 top-3 rounded-full bg-black px-3 py-1.5 text-[10px] font-semibold text-white sm:text-[11px]">
+                      Saved
                     </div>
+                  )}
+                </div>
+
+                {/* Controls */}
+
+                <div className="flex items-center justify-between gap-2 p-3">
+                  <div className="flex gap-2">
+                    <button
+                      type="button"
+                      disabled
+                      className="rounded-lg border border-black/10 px-3 py-2 text-xs font-semibold opacity-30"
+                    >
+                      ←
+                    </button>
 
                     <button
                       type="button"
-                      disabled={submitting}
-                      onClick={() => removeImage(index)}
-                      className="rounded-lg border border-red-200 px-3 py-2 text-xs font-semibold text-red-600 transition hover:bg-red-600 hover:text-white disabled:opacity-40"
+                      disabled={images.length <= 1 || submitting}
+                      onClick={() => moveImage(0, "right")}
+                      className="rounded-lg border border-black/10 px-3 py-2 text-xs font-semibold transition hover:bg-black hover:text-white disabled:cursor-not-allowed disabled:opacity-30"
                     >
-                      Remove
+                      →
                     </button>
                   </div>
+
+                  <button
+                    type="button"
+                    disabled={submitting}
+                    onClick={() => removeImage(0)}
+                    className="rounded-lg border border-red-200 px-3 py-2 text-xs font-semibold text-red-600 transition hover:bg-red-600 hover:text-white disabled:opacity-40"
+                  >
+                    Remove
+                  </button>
                 </div>
-              ))}
+              </div>
+
+              {/* =================================================
+                  OTHER SMALL IMAGES
+              ================================================== */}
+
+              {images.length > 1 && (
+                <div className="grid min-w-0 grid-cols-2 gap-3 sm:grid-cols-3 lg:grid-cols-2">
+                  {images.slice(1).map((image, smallIndex) => {
+                    const index = smallIndex + 1;
+
+                    return (
+                      <div
+                        key={image.id}
+                        className="min-w-0 overflow-hidden rounded-xl border border-black/10 bg-white sm:rounded-2xl"
+                      >
+                        {/* Image */}
+
+                        <div className="relative aspect-square overflow-hidden bg-black/[0.04]">
+                          <img
+                            src={image.preview}
+                            alt={image.alt || `${form.make} ${form.model}`}
+                            className="h-full w-full object-cover"
+                          />
+
+                          {/* Number */}
+
+                          <div className="absolute left-2 top-2 rounded-full bg-white px-2 py-1 text-[9px] font-semibold shadow-sm sm:text-[10px]">
+                            {index + 1}
+                          </div>
+
+                          {/* Saved */}
+
+                          {image.isExisting && (
+                            <div className="absolute right-2 top-2 rounded-full bg-black px-2 py-1 text-[9px] font-semibold text-white sm:text-[10px]">
+                              Saved
+                            </div>
+                          )}
+                        </div>
+
+                        {/* Controls */}
+
+                        <div className="flex items-center justify-between gap-1 p-2">
+                          <div className="flex gap-1">
+                            <button
+                              type="button"
+                              disabled={index === 0 || submitting}
+                              onClick={() => moveImage(index, "left")}
+                              className="rounded-md border border-black/10 px-2 py-1.5 text-[10px] font-semibold transition hover:bg-black hover:text-white disabled:cursor-not-allowed disabled:opacity-30"
+                            >
+                              ←
+                            </button>
+
+                            <button
+                              type="button"
+                              disabled={
+                                index === images.length - 1 || submitting
+                              }
+                              onClick={() => moveImage(index, "right")}
+                              className="rounded-md border border-black/10 px-2 py-1.5 text-[10px] font-semibold transition hover:bg-black hover:text-white disabled:cursor-not-allowed disabled:opacity-30"
+                            >
+                              →
+                            </button>
+                          </div>
+
+                          <button
+                            type="button"
+                            disabled={submitting}
+                            onClick={() => removeImage(index)}
+                            className="rounded-md border border-red-200 px-2 py-1.5 text-[10px] font-semibold text-red-600 transition hover:bg-red-600 hover:text-white disabled:opacity-40"
+                          >
+                            Remove
+                          </button>
+                        </div>
+                      </div>
+                    );
+                  })}
+                </div>
+              )}
             </div>
           )}
         </div>
       </FormSection>
 
-      {/* Inventory settings */}
+      {/* =====================================================
+          INVENTORY SETTINGS
+      ====================================================== */}
+
       <FormSection
         title="Inventory settings"
         description="Control how this vehicle is displayed on the website."
       >
-        <div className="grid gap-5 md:grid-cols-2">
+        <div className="grid min-w-0 gap-5 md:grid-cols-2">
           <SelectField
             label="Status"
             name="status"
@@ -864,21 +946,21 @@ Panoramic roof`}
             options={STATUSES}
           />
 
-          <label className="flex min-h-11 cursor-pointer items-center gap-3 rounded-xl border border-black/10 bg-black/[0.02] px-4">
+          <label className="flex min-h-11 cursor-pointer items-start gap-3 rounded-xl border border-black/10 bg-black/[0.02] px-4 py-3 sm:items-center sm:py-2.5">
             <input
               type="checkbox"
               name="isFeatured"
               checked={form.isFeatured}
               onChange={handleChange}
-              className="h-4 w-4 accent-black"
+              className="mt-0.5 h-4 w-4 shrink-0 accent-black sm:mt-0"
             />
 
-            <span>
+            <span className="min-w-0">
               <span className="block text-sm font-semibold">
                 Featured vehicle
               </span>
 
-              <span className="block text-xs text-black/40">
+              <span className="mt-0.5 block text-xs leading-5 text-black/40">
                 Show this vehicle in the Home page featured section.
               </span>
             </span>
@@ -886,11 +968,14 @@ Panoramic roof`}
         </div>
       </FormSection>
 
-      {/* Actions */}
-      <div className="flex flex-col-reverse justify-end gap-3 border-t border-black/10 pt-6 sm:flex-row">
+      {/* =====================================================
+          ACTIONS
+      ====================================================== */}
+
+      <div className="flex flex-col-reverse gap-3 border-t border-black/10 pt-5 sm:flex-row sm:justify-end sm:pt-6">
         <Link
           href="/admin/cars"
-          className="flex h-12 items-center justify-center rounded-full border border-black/15 px-7 text-sm font-semibold transition hover:bg-black hover:text-white"
+          className="flex h-12 w-full items-center justify-center rounded-full border border-black/15 px-7 text-sm font-semibold transition hover:bg-black hover:text-white active:scale-[0.98] sm:w-auto"
         >
           Cancel
         </Link>
@@ -898,7 +983,7 @@ Panoramic roof`}
         <button
           type="submit"
           disabled={submitting}
-          className="flex h-12 items-center justify-center rounded-full bg-black px-8 text-sm font-semibold text-white transition hover:bg-black/80 disabled:cursor-not-allowed disabled:opacity-50"
+          className="flex h-12 w-full items-center justify-center rounded-full bg-black px-8 text-sm font-semibold text-white transition hover:bg-black/80 active:scale-[0.98] disabled:cursor-not-allowed disabled:opacity-50 sm:w-auto"
         >
           {submitting
             ? isEdit
@@ -913,19 +998,31 @@ Panoramic roof`}
   );
 }
 
+/* =========================================================
+   FORM SECTION
+========================================================= */
+
 function FormSection({ title, description, children }) {
   return (
-    <section className="rounded-2xl border border-black/10 bg-white p-6 md:p-8">
-      <div className="mb-6">
-        <h2 className="text-lg font-semibold tracking-tight">{title}</h2>
+    <section className="w-full min-w-0 rounded-2xl border border-black/10 bg-white p-4 sm:p-6 lg:p-8">
+      <div className="mb-5 sm:mb-6">
+        <h2 className="text-base font-semibold tracking-tight sm:text-lg">
+          {title}
+        </h2>
 
-        <p className="mt-1 text-sm leading-6 text-black/45">{description}</p>
+        <p className="mt-1 text-xs leading-5 text-black/45 sm:text-sm sm:leading-6">
+          {description}
+        </p>
       </div>
 
       {children}
     </section>
   );
 }
+
+/* =========================================================
+   INPUT
+========================================================= */
 
 function InputField({
   label,
@@ -939,7 +1036,7 @@ function InputField({
   max,
 }) {
   return (
-    <div>
+    <div className="min-w-0">
       <label htmlFor={name} className="mb-2 block text-sm font-medium">
         {label}
 
@@ -956,15 +1053,19 @@ function InputField({
         required={required}
         min={min}
         max={max}
-        className="h-11 w-full rounded-xl border border-black/15 bg-white px-4 text-sm outline-none transition placeholder:text-black/30 focus:border-black"
+        className="h-11 w-full min-w-0 rounded-xl border border-black/15 bg-white px-4 text-sm outline-none transition placeholder:text-black/30 focus:border-black"
       />
     </div>
   );
 }
 
+/* =========================================================
+   SELECT
+========================================================= */
+
 function SelectField({ label, name, value, onChange, options }) {
   return (
-    <div>
+    <div className="min-w-0">
       <label htmlFor={name} className="mb-2 block text-sm font-medium">
         {label}
       </label>
@@ -974,7 +1075,7 @@ function SelectField({ label, name, value, onChange, options }) {
         name={name}
         value={value}
         onChange={onChange}
-        className="h-11 w-full rounded-xl border border-black/15 bg-white px-3 text-sm outline-none transition focus:border-black"
+        className="h-11 w-full min-w-0 rounded-xl border border-black/15 bg-white px-3 text-sm outline-none transition focus:border-black"
       >
         {options.map((option) => (
           <option key={option} value={option}>
@@ -985,13 +1086,16 @@ function SelectField({ label, name, value, onChange, options }) {
     </div>
   );
 }
+
 // "use client";
 
-// import { useState } from "react";
+// import { useEffect, useRef, useState } from "react";
 // import Link from "next/link";
 // import { useRouter } from "next/navigation";
+
 // const BODY_TYPES = [
 //   "Sedan",
+//   "Roadster",
 //   "SUV",
 //   "Coupe",
 //   "Convertible",
@@ -1012,23 +1116,13 @@ function SelectField({ label, name, value, onChange, options }) {
 //   "Other",
 // ];
 
-// const TRANSMISSIONS = [
-//   "Automatic",
-//   "Manual",
-//   "CVT",
-//   "Other",
-// ];
+// const TRANSMISSIONS = ["Automatic", "Manual", "CVT", "Other"];
 
-// const CONDITIONS = [
-//   "New",
-//   "Used",
-// ];
+// const CONDITIONS = ["New", "Used"];
 
-// const STATUSES = [
-//   "Available",
-//   "Reserved",
-//   "Sold",
-// ];
+// const STATUSES = ["Available", "Reserved", "Sold"];
+
+// const MAX_IMAGES = 15;
 
 // const DEFAULT_FORM = {
 //   stockNumber: "",
@@ -1048,166 +1142,277 @@ function SelectField({ label, name, value, onChange, options }) {
 //   engine: "",
 //   description: "",
 //   features: "",
-//   images: [""],
 //   status: "Available",
 //   isFeatured: false,
 // };
 
-// export default function CarForm({
-//   initialData = null,
-// }) {
-//    const router = useRouter();
+// export default function CarForm({ initialData = null }) {
+//   const router = useRouter();
+
 //   const [form, setForm] = useState(() => {
 //     if (!initialData) {
 //       return DEFAULT_FORM;
 //     }
 
 //     return {
-//       stockNumber:
-//         initialData.stockNumber || "",
+//       stockNumber: initialData.stockNumber || "",
 
 //       make: initialData.make || "",
 
 //       model: initialData.model || "",
 
-//       year:
-//         initialData.year
-//           ? String(initialData.year)
-//           : "",
+//       year: initialData.year ? String(initialData.year) : "",
 
-//       price:
-//         initialData.price !== undefined
-//           ? String(initialData.price)
-//           : "",
+//       price: initialData.price !== undefined ? String(initialData.price) : "",
 
-//       currency:
-//         initialData.currency || "USD",
+//       currency: initialData.currency || "USD",
 
 //       mileage:
-//         initialData.mileage !== undefined
-//           ? String(initialData.mileage)
-//           : "",
+//         initialData.mileage !== undefined ? String(initialData.mileage) : "",
 
-//       mileageUnit:
-//         initialData.mileageUnit || "km",
+//       mileageUnit: initialData.mileageUnit || "km",
 
-//       transmission:
-//         initialData.transmission ||
-//         "Automatic",
+//       transmission: initialData.transmission || "Automatic",
 
-//       fuelType:
-//         initialData.fuelType || "Petrol",
+//       fuelType: initialData.fuelType || "Petrol",
 
-//       bodyType:
-//         initialData.bodyType || "SUV",
+//       bodyType: initialData.bodyType || "SUV",
 
-//       condition:
-//         initialData.condition || "Used",
+//       condition: initialData.condition || "Used",
 
-//       exteriorColor:
-//         initialData.exteriorColor || "",
+//       exteriorColor: initialData.exteriorColor || "",
 
-//       interiorColor:
-//         initialData.interiorColor || "",
+//       interiorColor: initialData.interiorColor || "",
 
 //       engine: initialData.engine || "",
 
-//       description:
-//         initialData.description || "",
+//       description: initialData.description || "",
 
-//       features: Array.isArray(
-//         initialData.features
-//       )
+//       features: Array.isArray(initialData.features)
 //         ? initialData.features.join("\n")
 //         : "",
 
-//       images:
-//         Array.isArray(initialData.images) &&
-//         initialData.images.length > 0
-//           ? initialData.images.map(
-//               (image) => image.url || ""
-//             )
-//           : [""],
+//       status: initialData.status || "Available",
 
-//       status:
-//         initialData.status || "Available",
-
-//       isFeatured:
-//         Boolean(initialData.isFeatured),
+//       isFeatured: Boolean(initialData.isFeatured),
 //     };
 //   });
 
-//   const [submitting, setSubmitting] =
-//     useState(false);
+//   const [images, setImages] = useState(() => {
+//     if (!initialData?.images || !Array.isArray(initialData.images)) {
+//       return [];
+//     }
 
-//   const [error, setError] =
-//     useState("");
+//     return initialData.images
+//       .filter((image) => image && image.url)
+//       .map((image, index) => ({
+//         id: image.publicId || `existing-${index}-${image.url}`,
 
-//   const [success, setSuccess] =
-//     useState("");
+//         url: image.url,
+
+//         publicId: image.publicId || "",
+
+//         alt: image.alt || "",
+
+//         isExisting: true,
+
+//         file: null,
+
+//         preview: image.url,
+//       }));
+//   });
+
+//   const [submitting, setSubmitting] = useState(false);
+
+//   const [error, setError] = useState("");
+
+//   const [success, setSuccess] = useState("");
+
+//   const previewUrls = useRef(new Set());
 
 //   const isEdit = Boolean(initialData?._id);
 
+//   useEffect(() => {
+//     return () => {
+//       for (const url of previewUrls.current) {
+//         URL.revokeObjectURL(url);
+//       }
+//     };
+//   }, []);
+
 //   function handleChange(event) {
-//     const {
-//       name,
-//       value,
-//       type,
-//       checked,
-//     } = event.target;
+//     const { name, value, type, checked } = event.target;
 
 //     setForm((current) => ({
 //       ...current,
-//       [name]:
-//         type === "checkbox"
-//           ? checked
-//           : value,
+//       [name]: type === "checkbox" ? checked : value,
 //     }));
 //   }
 
-//   function handleImageChange(
-//     index,
-//     value
-//   ) {
-//     setForm((current) => {
-//       const images = [...current.images];
+//   function handleImageSelection(event) {
+//     const selectedFiles = Array.from(event.target.files || []);
 
-//       images[index] = value;
+//     event.target.value = "";
 
-//       return {
-//         ...current,
-//         images,
-//       };
-//     });
-//   }
+//     if (selectedFiles.length === 0) {
+//       return;
+//     }
 
-//   function addImageField() {
-//     setForm((current) => ({
-//       ...current,
-//       images: [
-//         ...current.images,
-//         "",
-//       ],
-//     }));
-//   }
+//     setError("");
 
-//   function removeImageField(index) {
-//     setForm((current) => {
-//       if (current.images.length === 1) {
+//     const remainingSlots = MAX_IMAGES - images.length;
+
+//     if (remainingSlots <= 0) {
+//       setError(`You can upload a maximum of ${MAX_IMAGES} images.`);
+
+//       return;
+//     }
+
+//     const filesToAdd = selectedFiles.slice(0, remainingSlots);
+
+//     const invalidFile = filesToAdd.find(
+//       (file) => !["image/jpeg", "image/png", "image/webp"].includes(file.type),
+//     );
+
+//     if (invalidFile) {
+//       setError("Only JPG, PNG and WebP images are allowed.");
+
+//       return;
+//     }
+
+//     const tooLarge = filesToAdd.find((file) => file.size > 10 * 1024 * 1024);
+
+//     if (tooLarge) {
+//       setError("Each image must be smaller than 10MB.");
+
+//       return;
+//     }
+
+//     const existingKeys = new Set(
+//       images
+//         .filter((image) => image.file)
+//         .map(
+//           (image) =>
+//             `${image.file.name}-${image.file.lastModified}-${image.file.size}`,
+//         ),
+//     );
+
+//     const newImages = filesToAdd
+//       .filter((file) => {
+//         const key = `${file.name}-${file.lastModified}-${file.size}`;
+
+//         return !existingKeys.has(key);
+//       })
+//       .map((file) => {
+//         const preview = URL.createObjectURL(file);
+
+//         previewUrls.current.add(preview);
+
 //         return {
-//           ...current,
-//           images: [""],
+//           id: `${file.name}-${file.lastModified}-${file.size}`,
+
+//           file,
+
+//           preview,
+
+//           url: "",
+
+//           publicId: "",
+
+//           alt: file.name,
+
+//           isExisting: false,
 //         };
+//       });
+
+//     setImages((current) => [...current, ...newImages]);
+
+//     if (selectedFiles.length > remainingSlots) {
+//       setError(
+//         `Only ${remainingSlots} image${
+//           remainingSlots === 1 ? "" : "s"
+//         } could be added because the maximum is ${MAX_IMAGES}.`,
+//       );
+//     }
+//   }
+
+//   function removeImage(index) {
+//     setImages((current) => {
+//       const image = current[index];
+
+//       if (image?.preview && !image.isExisting) {
+//         URL.revokeObjectURL(image.preview);
+
+//         previewUrls.current.delete(image.preview);
 //       }
 
-//       return {
-//         ...current,
-//         images: current.images.filter(
-//           (_, imageIndex) =>
-//             imageIndex !== index
-//         ),
-//       };
+//       return current.filter((_, imageIndex) => imageIndex !== index);
 //     });
+//   }
+
+//   function moveImage(index, direction) {
+//     setImages((current) => {
+//       const newIndex = direction === "left" ? index - 1 : index + 1;
+
+//       if (newIndex < 0 || newIndex >= current.length) {
+//         return current;
+//       }
+
+//       const updated = [...current];
+
+//       [updated[index], updated[newIndex]] = [updated[newIndex], updated[index]];
+
+//       return updated;
+//     });
+//   }
+
+//   async function uploadNewImages() {
+//     const newImages = images.filter((image) => image.file && !image.isExisting);
+
+//     if (newImages.length === 0) {
+//       return [];
+//     }
+
+//     const formData = new FormData();
+
+//     for (const image of newImages) {
+//       formData.append("files", image.file);
+//     }
+
+//     const response = await fetch("/api/admin/upload", {
+//       method: "POST",
+//       body: formData,
+//     });
+
+//     const result = await response.json();
+
+//     if (!response.ok || !result.success) {
+//       throw new Error(result.message || "Failed to upload images");
+//     }
+
+//     return result.data.images || [];
+//   }
+
+//   async function deleteCloudinaryImages(publicIds) {
+//     if (!publicIds || publicIds.length === 0) {
+//       return;
+//     }
+
+//     const response = await fetch("/api/admin/upload", {
+//       method: "DELETE",
+//       headers: {
+//         "Content-Type": "application/json",
+//       },
+//       body: JSON.stringify({
+//         publicIds,
+//       }),
+//     });
+
+//     const result = await response.json();
+
+//     if (!response.ok || !result.success) {
+//       throw new Error(result.message || "Failed to delete images");
+//     }
 //   }
 
 //   async function handleSubmit(event) {
@@ -1217,23 +1422,96 @@ function SelectField({ label, name, value, onChange, options }) {
 //     setError("");
 //     setSuccess("");
 
+//     let newlyUploadedPublicIds = [];
+
 //     try {
+//       if (!form.make.trim()) {
+//         throw new Error("Make is required.");
+//       }
+
+//       if (!form.model.trim()) {
+//         throw new Error("Model is required.");
+//       }
+
+//       if (!form.year) {
+//         throw new Error("Year is required.");
+//       }
+
+//       if (!form.price) {
+//         throw new Error("Price is required.");
+//       }
+
+//       if (images.length > MAX_IMAGES) {
+//         throw new Error(`A maximum of ${MAX_IMAGES} images is allowed.`);
+//       }
+
+//       /*
+//        * Existing images that were removed
+//        * from the edit form.
+//        */
+//       const originalPublicIds = isEdit
+//         ? (initialData.images || [])
+//             .map((image) => image.publicId)
+//             .filter(Boolean)
+//         : [];
+
+//       const currentExistingPublicIds = images
+//         .filter((image) => image.isExisting)
+//         .map((image) => image.publicId)
+//         .filter(Boolean);
+
+//       const removedPublicIds = originalPublicIds.filter(
+//         (publicId) => !currentExistingPublicIds.includes(publicId),
+//       );
+
+//       /*
+//        * Upload new files first.
+//        */
+//       setSuccess("Uploading images...");
+
+//       const uploadedImages = await uploadNewImages();
+
+//       newlyUploadedPublicIds = uploadedImages
+//         .map((image) => image.publicId)
+//         .filter(Boolean);
+
+//       let uploadedIndex = 0;
+
+//       /*
+//        * Preserve the exact order selected
+//        * by the admin.
+//        */
+//       const finalImages = images.map((image) => {
+//         if (image.isExisting) {
+//           return {
+//             url: image.url,
+
+//             publicId: image.publicId,
+
+//             alt: image.alt || `${form.year} ${form.make} ${form.model}`,
+//           };
+//         }
+
+//         const uploaded = uploadedImages[uploadedIndex];
+
+//         uploadedIndex += 1;
+
+//         return {
+//           url: uploaded.url,
+
+//           publicId: uploaded.publicId,
+
+//           alt: `${form.year} ${form.make} ${form.model}`,
+//         };
+//       });
+
 //       const features = form.features
 //         .split("\n")
 //         .map((feature) => feature.trim())
 //         .filter(Boolean);
 
-//       const images = form.images
-//         .map((url) => url.trim())
-//         .filter(Boolean)
-//         .map((url) => ({
-//           url,
-//           alt: `${form.year} ${form.make} ${form.model}`,
-//         }));
-
 //       const payload = {
-//         stockNumber:
-//           form.stockNumber.trim(),
+//         stockNumber: form.stockNumber.trim(),
 
 //         make: form.make.trim(),
 
@@ -1243,126 +1521,120 @@ function SelectField({ label, name, value, onChange, options }) {
 
 //         price: Number(form.price),
 
-//         currency:
-//           form.currency.trim().toUpperCase(),
+//         currency: form.currency.trim().toUpperCase(),
 
-//         mileage: Number(
-//           form.mileage || 0
-//         ),
+//         mileage: Number(form.mileage || 0),
 
-//         mileageUnit:
-//           form.mileageUnit,
+//         mileageUnit: form.mileageUnit,
 
-//         transmission:
-//           form.transmission,
+//         transmission: form.transmission,
 
-//         fuelType:
-//           form.fuelType,
+//         fuelType: form.fuelType,
 
-//         bodyType:
-//           form.bodyType,
+//         bodyType: form.bodyType,
 
-//         condition:
-//           form.condition,
+//         condition: form.condition,
 
-//         exteriorColor:
-//           form.exteriorColor.trim(),
+//         exteriorColor: form.exteriorColor.trim(),
 
-//         interiorColor:
-//           form.interiorColor.trim(),
+//         interiorColor: form.interiorColor.trim(),
 
-//         engine:
-//           form.engine.trim(),
+//         engine: form.engine.trim(),
 
-//         description:
-//           form.description.trim(),
+//         description: form.description.trim(),
 
 //         features,
 
-//         images,
+//         images: finalImages,
 
-//         status:
-//           form.status,
+//         status: form.status,
 
-//         isFeatured:
-//           form.isFeatured,
+//         isFeatured: form.isFeatured,
 //       };
+
+//       setSuccess(isEdit ? "Updating car..." : "Adding car...");
 
 //       const endpoint = isEdit
 //         ? `/api/admin/cars/${initialData._id}`
 //         : "/api/admin/cars";
 
-//       const method = isEdit
-//         ? "PATCH"
-//         : "POST";
+//       const method = isEdit ? "PATCH" : "POST";
 
-//       const response = await fetch(
-//         endpoint,
-//         {
-//           method,
-//           headers: {
-//             "Content-Type":
-//               "application/json",
-//           },
-//           body: JSON.stringify(payload),
-//         }
-//       );
+//       const response = await fetch(endpoint, {
+//         method,
 
-//       const result =
-//         await response.json();
+//         headers: {
+//           "Content-Type": "application/json",
+//         },
 
-//       if (
-//         !response.ok ||
-//         !result.success
-//       ) {
+//         body: JSON.stringify(payload),
+//       });
+
+//       const result = await response.json();
+
+//       if (!response.ok || !result.success) {
 //         throw new Error(
-//           result.message ||
-//             `Failed to ${
-//               isEdit
-//                 ? "update"
-//                 : "create"
-//             } car`
+//           result.message || `Failed to ${isEdit ? "update" : "create"} car`,
 //         );
 //       }
 
-//       setSuccess(
-//         isEdit
-//           ? "Car updated successfully."
-//           : "Car added successfully."
-//       );
-
-//       if (!isEdit) {
-//         setForm(DEFAULT_FORM);
-//       }
+//       let cleanupWarning = "";
 
 //       /*
-//        * Redirect after a short delay so the
-//        * success message can be seen.
+//        * Delete old Cloudinary assets that the
+//        * admin removed while editing.
+//        *
+//        * This happens AFTER the database update
+//        * so we never remove an image before the
+//        * new car state is saved.
 //        */
-//       setTimeout(() => {
-//   router.push("/admin/cars");
-//   router.refresh();
-// }, 700);
-//     } catch (submitError) {
-//       console.error(
-//         "Car form submit error:",
-//         submitError
+//       if (removedPublicIds.length > 0) {
+//         try {
+//           await deleteCloudinaryImages(removedPublicIds);
+//         } catch (deleteError) {
+//           console.error("Removed image cleanup error:", deleteError);
+
+//           cleanupWarning =
+//             " The car was saved, but some removed images could not be deleted from Cloudinary.";
+//         }
+//       }
+
+//       setSuccess(
+//         `${
+//           isEdit ? "Car updated successfully." : "Car added successfully."
+//         }${cleanupWarning}`,
 //       );
 
-//       setError(
-//         submitError.message ||
-//           "Something went wrong."
-//       );
+//       setTimeout(() => {
+//         router.push("/admin/cars");
+//         router.refresh();
+//       }, 900);
+//     } catch (submitError) {
+//       console.error("Car form submit error:", submitError);
+
+//       /*
+//        * If MongoDB create/update failed after
+//        * Cloudinary upload succeeded, clean up
+//        * those newly uploaded assets.
+//        */
+//       if (newlyUploadedPublicIds.length > 0) {
+//         try {
+//           await deleteCloudinaryImages(newlyUploadedPublicIds);
+//         } catch (cleanupError) {
+//           console.error("New upload cleanup error:", cleanupError);
+//         }
+//       }
+
+//       setSuccess("");
+
+//       setError(submitError.message || "Something went wrong.");
 //     } finally {
 //       setSubmitting(false);
 //     }
 //   }
 
 //   return (
-//     <form
-//       onSubmit={handleSubmit}
-//       className="space-y-8"
-//     >
+//     <form onSubmit={handleSubmit} className="space-y-8">
 //       {error && (
 //         <div className="rounded-2xl border border-red-200 bg-red-50 p-5 text-sm leading-6 text-red-700">
 //           {error}
@@ -1375,7 +1647,7 @@ function SelectField({ label, name, value, onChange, options }) {
 //         </div>
 //       )}
 
-//       {/* Basic Information */}
+//       {/* Basic information */}
 //       <FormSection
 //         title="Basic information"
 //         description="Enter the main information customers will see about this vehicle."
@@ -1443,14 +1715,7 @@ function SelectField({ label, name, value, onChange, options }) {
 //             name="currency"
 //             value={form.currency}
 //             onChange={handleChange}
-//             options={[
-//               "USD",
-//               "QAR",
-//               "AED",
-//               "SAR",
-//               "EUR",
-//               "GBP",
-//             ]}
+//             options={["USD", "QAR", "AED", "SAR", "EUR", "GBP"]}
 //           />
 
 //           <div className="grid grid-cols-2 gap-3">
@@ -1469,16 +1734,13 @@ function SelectField({ label, name, value, onChange, options }) {
 //               name="mileageUnit"
 //               value={form.mileageUnit}
 //               onChange={handleChange}
-//               options={[
-//                 "km",
-//                 "miles",
-//               ]}
+//               options={["km", "miles"]}
 //             />
 //           </div>
 //         </div>
 //       </FormSection>
 
-//       {/* Vehicle specifications */}
+//       {/* Specifications */}
 //       <FormSection
 //         title="Vehicle specifications"
 //         description="Add the specifications customers can use to compare vehicles."
@@ -1573,65 +1835,111 @@ function SelectField({ label, name, value, onChange, options }) {
 // 360° camera
 // Adaptive cruise control
 // Panoramic roof`}
-//           className="w-full resize-y rounded-xl border border-black/15 px-4 py-4 text-sm leading-6 outline-none transition placeholder:text-black/30 focus:border-black"
+//           className="w-full resize-y rounded-xl border border-black/15 px-4 py-4 text-sm leading-6 outline-none placeholder:text-black/30 focus:border-black"
 //         />
 //       </FormSection>
 
 //       {/* Images */}
 //       <FormSection
 //         title="Vehicle images"
-//         description="Add the image URLs for this vehicle. The first image will be the primary image."
+//         description={`Upload up to ${MAX_IMAGES} images. The first image is used as the primary vehicle image.`}
 //       >
-//         <div className="space-y-4">
-//           {form.images.map(
-//             (image, index) => (
-//               <div
-//                 key={index}
-//                 className="flex gap-3"
-//               >
-//                 <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-black/[0.04] text-xs font-semibold text-black/40">
-//                   {index + 1}
-//                 </div>
+//         <div className="space-y-6">
+//           <label className="flex min-h-36 cursor-pointer flex-col items-center justify-center rounded-2xl border border-dashed border-black/20 bg-black/[0.02] px-6 py-8 text-center transition hover:border-black hover:bg-black/[0.035]">
+//             <div className="flex h-12 w-12 items-center justify-center rounded-full bg-black text-lg font-semibold text-white">
+//               +
+//             </div>
 
-//                 <input
-//                   type="url"
-//                   value={image}
-//                   onChange={(event) =>
-//                     handleImageChange(
-//                       index,
-//                       event.target.value
-//                     )
-//                   }
-//                   placeholder="https://example.com/car-image.jpg"
-//                   className="h-11 min-w-0 flex-1 rounded-xl border border-black/15 px-4 text-sm outline-none transition placeholder:text-black/30 focus:border-black"
-//                 />
+//             <p className="mt-4 text-sm font-semibold">Choose vehicle images</p>
 
-//                 <button
-//                   type="button"
-//                   onClick={() =>
-//                     removeImageField(
-//                       index
-//                     )
-//                   }
-//                   className="h-11 rounded-xl border border-red-200 px-4 text-xs font-semibold text-red-600 transition hover:bg-red-600 hover:text-white"
+//             <p className="mt-1 text-xs text-black/40">
+//               JPG, PNG or WebP · Maximum 10MB each
+//             </p>
+
+//             <input
+//               type="file"
+//               accept="image/jpeg,image/png,image/webp"
+//               multiple
+//               onChange={handleImageSelection}
+//               className="hidden"
+//             />
+//           </label>
+
+//           <div className="flex items-center justify-between gap-4">
+//             <p className="text-xs text-black/45">
+//               {images.length} / {MAX_IMAGES} images selected
+//             </p>
+
+//             {images.length > 0 && (
+//               <p className="text-xs text-black/40">
+//                 First image = primary image
+//               </p>
+//             )}
+//           </div>
+
+//           {images.length > 0 && (
+//             <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+//               {images.map((image, index) => (
+//                 <div
+//                   key={image.id}
+//                   className="overflow-hidden rounded-2xl border border-black/10 bg-white"
 //                 >
-//                   Remove
-//                 </button>
-//               </div>
-//             )
-//           )}
+//                   <div className="relative aspect-[4/3] overflow-hidden bg-black/[0.04]">
+//                     <img
+//                       src={image.preview}
+//                       alt={image.alt || `${form.make} ${form.model}`}
+//                       className="h-full w-full object-cover"
+//                     />
 
-//           <button
-//             type="button"
-//             onClick={addImageField}
-//             className="rounded-xl border border-dashed border-black/20 px-5 py-3 text-sm font-semibold transition hover:border-black hover:bg-black/[0.03]"
-//           >
-//             + Add another image
-//           </button>
+//                     <div className="absolute left-3 top-3 rounded-full bg-white px-3 py-1.5 text-[11px] font-semibold shadow-sm">
+//                       {index === 0 ? "Primary" : `Image ${index + 1}`}
+//                     </div>
+
+//                     {image.isExisting && (
+//                       <div className="absolute right-3 top-3 rounded-full bg-black px-3 py-1.5 text-[11px] font-semibold text-white">
+//                         Saved
+//                       </div>
+//                     )}
+//                   </div>
+
+//                   <div className="flex items-center justify-between gap-2 p-3">
+//                     <div className="flex gap-2">
+//                       <button
+//                         type="button"
+//                         disabled={index === 0 || submitting}
+//                         onClick={() => moveImage(index, "left")}
+//                         className="rounded-lg border border-black/10 px-3 py-2 text-xs font-semibold disabled:cursor-not-allowed disabled:opacity-30"
+//                       >
+//                         ←
+//                       </button>
+
+//                       <button
+//                         type="button"
+//                         disabled={index === images.length - 1 || submitting}
+//                         onClick={() => moveImage(index, "right")}
+//                         className="rounded-lg border border-black/10 px-3 py-2 text-xs font-semibold disabled:cursor-not-allowed disabled:opacity-30"
+//                       >
+//                         →
+//                       </button>
+//                     </div>
+
+//                     <button
+//                       type="button"
+//                       disabled={submitting}
+//                       onClick={() => removeImage(index)}
+//                       className="rounded-lg border border-red-200 px-3 py-2 text-xs font-semibold text-red-600 transition hover:bg-red-600 hover:text-white disabled:opacity-40"
+//                     >
+//                       Remove
+//                     </button>
+//                   </div>
+//                 </div>
+//               ))}
+//             </div>
+//           )}
 //         </div>
 //       </FormSection>
 
-//       {/* Status */}
+//       {/* Inventory settings */}
 //       <FormSection
 //         title="Inventory settings"
 //         description="Control how this vehicle is displayed on the website."
@@ -1694,21 +2002,13 @@ function SelectField({ label, name, value, onChange, options }) {
 //   );
 // }
 
-// function FormSection({
-//   title,
-//   description,
-//   children,
-// }) {
+// function FormSection({ title, description, children }) {
 //   return (
 //     <section className="rounded-2xl border border-black/10 bg-white p-6 md:p-8">
 //       <div className="mb-6">
-//         <h2 className="text-lg font-semibold tracking-tight">
-//           {title}
-//         </h2>
+//         <h2 className="text-lg font-semibold tracking-tight">{title}</h2>
 
-//         <p className="mt-1 text-sm leading-6 text-black/45">
-//           {description}
-//         </p>
+//         <p className="mt-1 text-sm leading-6 text-black/45">{description}</p>
 //       </div>
 
 //       {children}
@@ -1729,17 +2029,10 @@ function SelectField({ label, name, value, onChange, options }) {
 // }) {
 //   return (
 //     <div>
-//       <label
-//         htmlFor={name}
-//         className="mb-2 block text-sm font-medium"
-//       >
+//       <label htmlFor={name} className="mb-2 block text-sm font-medium">
 //         {label}
 
-//         {required && (
-//           <span className="ml-1 text-red-500">
-//             *
-//           </span>
-//         )}
+//         {required && <span className="ml-1 text-red-500">*</span>}
 //       </label>
 
 //       <input
@@ -1758,19 +2051,10 @@ function SelectField({ label, name, value, onChange, options }) {
 //   );
 // }
 
-// function SelectField({
-//   label,
-//   name,
-//   value,
-//   onChange,
-//   options,
-// }) {
+// function SelectField({ label, name, value, onChange, options }) {
 //   return (
 //     <div>
-//       <label
-//         htmlFor={name}
-//         className="mb-2 block text-sm font-medium"
-//       >
+//       <label htmlFor={name} className="mb-2 block text-sm font-medium">
 //         {label}
 //       </label>
 
@@ -1782,10 +2066,7 @@ function SelectField({ label, name, value, onChange, options }) {
 //         className="h-11 w-full rounded-xl border border-black/15 bg-white px-3 text-sm outline-none transition focus:border-black"
 //       >
 //         {options.map((option) => (
-//           <option
-//             key={option}
-//             value={option}
-//           >
+//           <option key={option} value={option}>
 //             {option}
 //           </option>
 //         ))}
