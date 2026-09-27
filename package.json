@@ -9,13 +9,15 @@
     "lint": "eslint"
   },
   "dependencies": {
+    "bcryptjs": "^3.0.3",
     "cloudinary": "^2.11.0",
     "embla-carousel-react": "^8.6.0",
     "framer-motion": "^13.4.0",
     "lucide-react": "^1.47.0",
     "mongodb": "^7.6.0",
-    "mongoose": "^9.10.1",
+    "mongoose": "^9.10.2",
     "next": "16.3.5",
+    "next-auth": "^4.24.15",
     "react": "19.2.8",
     "react-dom": "19.2.8"
   },
