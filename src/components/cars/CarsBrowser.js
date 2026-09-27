@@ -951,7 +951,7 @@ export default function CarsBrowser({
 
       <section className="bg-white">
         <div className="mx-auto max-w-[1800px] px-6 py-10 md:px-10 md:py-12 lg:px-14 lg:py-14">
-          <div className="mb-8 flex items-center justify-between gap-1 border-b border-black/10 pb-5">
+          {/* <div className="mb-8 flex items-center justify-between gap-1 border-b border-black/10 pb-5">
             <div className="flex items-center gap-3">
               <p className="font-montserrat text-[9px] uppercase tracking-[0.2em] text-black/35">
                 {pagination.total}{" "}
@@ -1002,7 +1002,7 @@ export default function CarsBrowser({
                 />
               </div>
             </div>
-          </div>
+          </div> */}
 
           <div className="grid gap-10 lg:grid-cols-[230px_1fr] xl:grid-cols-[250px_1fr]">
             {/* DESKTOP FILTERS */}
@@ -1035,7 +1035,7 @@ export default function CarsBrowser({
 
             {/* MOBILE FILTER */}
 
-            {/* <AnimatePresence>
+            <AnimatePresence>
               {mobileFiltersOpen && (
                 <>
                   <motion.div
@@ -1123,7 +1123,7 @@ export default function CarsBrowser({
                   </motion.aside>
                 </>
               )}
-            </AnimatePresence> */}
+            </AnimatePresence>
 
             {/* INVENTORY CONTENT */}
 
