@@ -1,4 +1,5 @@
 import { Bebas_Neue, Montserrat } from "next/font/google";
+import Providers from "../lib/providers";
 import "./globals.css";
 
 const bebasNeue = Bebas_Neue({
@@ -22,7 +23,7 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en">
       <body className={`${bebasNeue.variable} ${montserrat.variable}`}>
-        {children}
+        <Providers>{children}</Providers>
       </body>
     </html>
   );
