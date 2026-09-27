@@ -816,7 +816,7 @@ export default function CarsBrowser({
           HERO
       ====================================================== */}
 
-      <section className="relative h-[40dvh] min-h-[320px] overflow-hidden bg-[#e8e8e5] md:min-h-[420px]">
+      <section className="relative h-[40vh] min-h-[320px] overflow-hidden bg-[#e8e8e5] md:min-h-[420px]">
         <div className="absolute inset-0">
           <Image
             src={HERO_IMAGE}
@@ -951,7 +951,7 @@ export default function CarsBrowser({
 
       <section className="bg-white">
         <div className="mx-auto max-w-[1800px] px-6 py-10 md:px-10 md:py-12 lg:px-14 lg:py-14">
-          <div className="mb-8 flex items-center justify-between gap-5 border-b border-black/10 pb-5">
+          <div className="mb-8 flex items-center justify-between gap-1 border-b border-black/10 pb-5">
             <div className="flex items-center gap-3">
               <p className="font-montserrat text-[9px] uppercase tracking-[0.2em] text-black/35">
                 {pagination.total}{" "}
