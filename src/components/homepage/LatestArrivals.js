@@ -135,7 +135,6 @@ export default function LatestArrivals() {
     if (!car?.images?.length) {
       return "/images/placeholder-car.jpg";
     }
-   console.log(car,"papap")
     return car.images[0]?.url || "/images/placeholder-car.jpg";
   };
 

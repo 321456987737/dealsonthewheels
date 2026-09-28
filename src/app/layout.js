@@ -1,7 +1,7 @@
 import { Bebas_Neue, Montserrat } from "next/font/google";
 import Providers from "../lib/providers";
 import "./globals.css";
-
+import { Analytics } from "@vercel/analytics/next"
 const bebasNeue = Bebas_Neue({
   variable: "--font-bebas-neue",
   subsets: ["latin"],
@@ -23,6 +23,7 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en">
       <body className={`${bebasNeue.variable} ${montserrat.variable}`}>
+        <Analytics/>
         <Providers>{children}</Providers>
       </body>
     </html>
