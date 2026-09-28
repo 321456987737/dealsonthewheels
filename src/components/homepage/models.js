@@ -108,12 +108,12 @@ export default function ModelsSection() {
       ====================================================== */}
 
       <div className="mx-auto max-w-[1800px] px-6 md:px-10 lg:px-14">
-        <div className="grid min-h-[72vh] grid-cols-1 lg:grid-cols-[0.85fr_1.15fr]">
+        <div className="grid md:min-h-[72vh] min-h-[65vh] grid-cols-1 lg:grid-cols-[0.85fr_1.15fr]">
           {/* ==================================================
               LEFT CONTENT
           ================================================== */}
 
-          <div className="flex flex-col justify-center py-16 md:py-20 lg:pr-14 xl:pr-20">
+          <div className="flex flex-col justify-center py-8 md:py-20 lg:pr-14 xl:pr-20">
             <AnimatePresence mode="wait">
               <motion.div
                 key={model.id}
