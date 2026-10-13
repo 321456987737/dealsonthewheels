@@ -1,6 +1,6 @@
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import { ArrowUpRight, MapPin, MessageCircle, Phone } from "lucide-react";
+import { ArrowUpRight } from "lucide-react";
 
 async function getCar(id) {
   const baseUrl = process.env.NEXT_PUBLIC_SITE_URL ;
@@ -79,7 +79,7 @@ export default async function Page({ params }) {
     notFound();
   }
 
-  const { car, business } = data;
+  const { car } = data;
 
   const latestCars = await getLatestCars(car._id);
 
@@ -90,18 +90,6 @@ export default async function Page({ params }) {
   const formattedMileage = new Intl.NumberFormat("en-US").format(
     car.mileage || 0,
   );
-
-  const whatsappNumber = business?.whatsapp
-    ? business.whatsapp.replace(/\D/g, "")
-    : "";
-
-  const whatsappMessage = encodeURIComponent(
-    `Hello, I'm interested in the ${car.year} ${car.make} ${car.model}.`,
-  );
-
-  const whatsappUrl = whatsappNumber
-    ? `https://wa.me/${whatsappNumber}?text=${whatsappMessage}`
-    : null;
 
   return (
     <main className="min-h-screen bg-white text-black ">
@@ -318,36 +306,6 @@ export default async function Page({ params }) {
     />
   </Link>
 
-  {/* CALL */}
-
-  {business?.phone && (
-    <a
-      href={`tel:${business.phone}`}
-      className="group flex items-center justify-center gap-3 border border-black/15 px-6 py-4 font-montserrat text-[10px] font-medium uppercase tracking-[0.18em] transition-all duration-300 hover:border-black md:text-[11px]"
-    >
-      <Phone size={14} strokeWidth={1.2} />
-
-      Call dealership
-    </a>
-  )}
-
-  {/* WHATSAPP */}
-
-  {whatsappUrl && (
-    <a
-      href={whatsappUrl}
-      target="_blank"
-      rel="noopener noreferrer"
-      className="group flex items-center justify-center gap-3 border border-black/15 px-6 py-4 font-montserrat text-[10px] font-medium uppercase tracking-[0.18em] transition-all duration-300 hover:border-black md:text-[11px]"
-    >
-      <MessageCircle
-        size={14}
-        strokeWidth={1.2}
-      />
-
-      WhatsApp
-    </a>
-  )}
 </div>
 
                 {/* STOCK */}
@@ -489,41 +447,14 @@ export default async function Page({ params }) {
 
             <div className="border-t border-white/10 pt-7">
               <p className="font-montserrat text-[10px] uppercase tracking-[0.25em] text-white/25 md:text-[11px]">
-                {business?.name || "Our Showroom"}
+                Demo Auto · Demo showroom
               </p>
-
-              {business?.address && (
-                <div className="mt-5 flex gap-3">
-                  <MapPin
-                    size={16}
-                    strokeWidth={1.2}
-                    className="mt-0.5 shrink-0 text-white/40"
-                  />
-
-                  <p className="font-montserrat text-[11px] leading-[1.8] tracking-[0.04em] text-white/45 md:text-[12px]">
-                    {business.address}
-                    {business.city ? `, ${business.city}` : ""}
-                    {business.country ? `, ${business.country}` : ""}
-                  </p>
-                </div>
-              )}
-
               <div className="mt-7 flex flex-wrap gap-3">
-                {business?.phone && (
-                  <a
-                    href={`tel:${business.phone}`}
-                    className="group inline-flex items-center gap-3 border border-white/20 px-5 py-3.5 font-montserrat text-[9px] font-medium uppercase tracking-[0.18em] transition-all duration-300 hover:border-white md:text-[10px]"
-                  >
-                    <Phone size={14} strokeWidth={1.2} />
-                    Call us
-                  </a>
-                )}
-
                 <Link
                   href="/contact"
                   className="group inline-flex items-center gap-3 bg-white px-5 py-3.5 font-montserrat text-[9px] font-medium uppercase tracking-[0.18em] text-black transition-all duration-300 hover:bg-white/85 md:text-[10px]"
                 >
-                  Contact dealership
+                  Contact demo team
                   <ArrowUpRight
                     size={14}
                     strokeWidth={1.2}

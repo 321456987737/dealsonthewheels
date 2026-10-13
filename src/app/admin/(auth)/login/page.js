@@ -53,12 +53,12 @@ export default function AdminLoginPage() {
           <div className="mb-8 text-center">
             <div className="mx-auto flex h-11 w-11 items-center justify-center rounded-2xl bg-[#181818]">
               <span className="text-xs font-bold tracking-tight text-white">
-                DW
+                DA
               </span>
             </div>
 
             <p className="mt-4 text-[10px] font-semibold uppercase tracking-[0.24em] text-black/35">
-              Deals On Wheels Qatar
+              Demo Auto · Demo Website
             </p>
 
             <h1 className="mt-3 text-3xl font-semibold tracking-tight text-[#181818]">

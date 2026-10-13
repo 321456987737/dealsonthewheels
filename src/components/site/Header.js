@@ -13,8 +13,8 @@ import {
   CarFront,
   Wrench,
   Info,
-  Phone,
   Car,
+  Phone,
 } from "lucide-react";
 
 const navLinks = [
@@ -121,11 +121,11 @@ export default function Header() {
 
             <div>
               <p className="text-sm font-semibold tracking-tight text-white">
-                Dealership
+                Demo Auto
               </p>
 
               <p className="text-xs text-white/50">
-                Quality Cars
+                Demo Website
               </p>
             </div>
           </Link>
@@ -169,32 +169,12 @@ export default function Header() {
           {/* Actions */}
 
           <div className="flex shrink-0 items-center gap-3">
-            {/* WhatsApp */}
-
-            <a
-              href="https://wa.me/97433774443"
-              target="_blank"
-              rel="noopener noreferrer"
-              aria-label="Contact us on WhatsApp"
-              className="hidden rounded-full bg-white px-5 py-3 text-sm font-medium text-[#181818] transition hover:bg-white/90 lg:inline-flex"
+            <Link
+              href="/cars"
+              className="rounded-full bg-white px-5 py-3 text-sm font-medium text-[#181818] transition hover:bg-white/90"
             >
-              WhatsApp
-            </a>
-
-            {/* Call */}
-
-            <a
-              href="tel:+97433774443"
-              aria-label="Call dealership"
-              className="inline-flex items-center gap-2 rounded-full border border-white/20 px-5 py-3 text-sm font-medium text-white transition hover:bg-white hover:text-[#181818]"
-            >
-              <Phone
-                size={16}
-                strokeWidth={1}
-              />
-
-              Call
-            </a>
+              View inventory
+            </Link>
 
             {/* Admin */}
 
@@ -236,44 +216,23 @@ export default function Header() {
 
             <div>
               <p className="text-sm font-semibold tracking-tight text-white">
-                Dealership
+                Demo Auto
               </p>
 
               <p className="text-[10px] text-white/50">
-                Quality Cars
+                Demo Website
               </p>
             </div>
           </Link>
 
-          {/* Actions */}
-
-          <div className="flex items-center gap-4">
-            {/* Call */}
-
-            <a
-              href="tel:+97433774443"
-              aria-label="Call dealership"
+          {session && (
+            <Link
+              href="/admin"
               className="inline-flex items-center gap-2 rounded-full border border-white/20 px-4 py-2.5 text-xs font-medium text-white transition active:scale-95"
             >
-              <Phone
-                size={15}
-                strokeWidth={1}
-              />
-
-              Call
-            </a>
-
-            {/* Admin */}
-
-            {session && (
-              <Link
-                href="/admin"
-                className="inline-flex items-center gap-2 rounded-full border border-white/20 px-4 py-2.5 text-xs font-medium text-white transition active:scale-95"
-              >
-                Admin Panel
-              </Link>
-            )}
-          </div>
+              Admin Panel
+            </Link>
+          )}
         </div>
       </motion.header>
 

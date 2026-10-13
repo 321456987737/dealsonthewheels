@@ -90,13 +90,13 @@ export default function AdminSignupPage() {
           <div className="mb-7 flex items-start gap-4">
             <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-2xl bg-[#181818]">
               <span className="text-xs font-bold tracking-tight text-white">
-                DW
+                DA
               </span>
             </div>
 
             <div>
               <p className="text-[10px] font-semibold uppercase tracking-[0.24em] text-black/35">
-                Deals On Wheels Qatar
+                Demo Auto · Demo Website
               </p>
 
               <h1 className="mt-1.5 text-2xl font-semibold tracking-tight text-[#181818] sm:text-3xl">

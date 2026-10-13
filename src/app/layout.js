@@ -15,8 +15,8 @@ const montserrat = Montserrat({
 });
 
 export const metadata = {
-  title: "My Website",
-  description: "My Website",
+  title: "Demo Auto | Demo Vehicle Website",
+  description: "A demo automotive inventory and dealership website.",
 };
 
 export default function RootLayout({ children }) {

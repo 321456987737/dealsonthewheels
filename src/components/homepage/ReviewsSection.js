@@ -7,27 +7,27 @@ import { ArrowUpRight, Quote, Star } from "lucide-react";
 const reviews = [
   {
     id: 1,
-    name: "Ahmed M.",
-    location: "Doha, Qatar",
-    date: "Customer review",
+    name: "Sample customer 01",
+    location: "Demo testimonial",
+    date: "Demo content",
     rating: 5,
     text: "A professional and straightforward experience. The team was helpful, answered my questions clearly, and made the entire process comfortable.",
     vehicle: "Vehicle purchase",
   },
   {
     id: 2,
-    name: "Mohammed A.",
-    location: "Doha, Qatar",
-    date: "Customer review",
+    name: "Sample customer 02",
+    location: "Demo testimonial",
+    date: "Demo content",
     rating: 5,
     text: "The showroom had a great selection of vehicles. I appreciated the attention to detail and the time taken to explain everything.",
     vehicle: "Showroom experience",
   },
   {
     id: 3,
-    name: "Khalid R.",
-    location: "Qatar",
-    date: "Customer review",
+    name: "Sample customer 03",
+    location: "Demo testimonial",
+    date: "Demo content",
     rating: 5,
     text: "A smooth experience from the first conversation to the showroom visit. Communication was clear and the team was easy to deal with.",
     vehicle: "Customer service",
@@ -60,7 +60,7 @@ export default function ReviewsSection() {
               viewport={{ once: true, amount: 0.4 }}
               className="mb-4 font-montserrat text-[9px] font-medium uppercase tracking-[0.35em] text-black/30 md:text-[10px]"
             >
-              The customer experience
+              Sample reviews · Demo content
             </motion.p>
 
             <motion.h2
@@ -88,7 +88,7 @@ export default function ReviewsSection() {
           </div>
 
           <motion.a
-            href="#contact"
+            href="/contact"
             initial={{ opacity: 0, y: 12 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
@@ -178,7 +178,7 @@ export default function ReviewsSection() {
           </p>
 
           <a
-            href="#contact"
+            href="/contact"
             className="group inline-flex w-fit items-center gap-2 font-montserrat text-[9px] font-semibold uppercase tracking-[0.14em] hover:text-black/55"
           >
             Get in touch

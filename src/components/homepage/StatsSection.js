@@ -6,21 +6,21 @@ import { ArrowUpRight } from "lucide-react";
 const stats = [
   {
     id: 1,
-    value: "1,200+",
-    label: "Vehicles Sold",
-    description: "Helping drivers find their perfect vehicle.",
+    value: "000",
+    label: "Sample metric",
+    description: "Replace with a verified dealership statistic.",
   },
   {
     id: 2,
-    value: "950+",
-    label: "Happy Clients",
-    description: "Built on trust, service, and lasting relationships.",
+    value: "000",
+    label: "Sample metric",
+    description: "Replace with a verified dealership statistic.",
   },
   {
     id: 3,
-    value: "10+",
-    label: "Years of Experience",
-    description: "A commitment to quality and automotive excellence.",
+    value: "000",
+    label: "Sample metric",
+    description: "Replace with a verified dealership statistic.",
   },
 ];
 
@@ -50,7 +50,7 @@ export default function StatsSection() {
               viewport={{ once: true, amount: 0.4 }}
               className="mb-4 font-montserrat text-[9px] font-medium uppercase tracking-[0.35em] text-black/35 md:text-[10px]"
             >
-              Our journey in numbers
+              Sample statistics · Demo content
             </motion.p>
 
             <motion.h2
@@ -78,7 +78,7 @@ export default function StatsSection() {
           </div>
 
           <motion.a
-            href="#contact"
+            href="/contact"
             initial={{ opacity: 0, y: 12 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
@@ -151,7 +151,7 @@ export default function StatsSection() {
           </p>
 
           <span className="font-montserrat text-[9px] uppercase tracking-[0.14em] text-black/40">
-            Doha, Qatar
+            Demo location
           </span>
         </motion.div>
       </div>

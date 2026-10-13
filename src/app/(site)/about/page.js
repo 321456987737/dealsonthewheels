@@ -10,32 +10,7 @@ import {
   Users,
 } from "lucide-react";
 
-async function getBusiness() {
-  const baseUrl =
-    process.env.NEXT_PUBLIC_SITE_URL || "http://localhost:3000";
-
-  try {
-    const response = await fetch(`${baseUrl}/api/business`, {
-      cache: "no-store",
-    });
-
-    if (!response.ok) {
-      return null;
-    }
-
-    const result = await response.json();
-
-    return result.success ? result.data : null;
-  } catch {
-    return null;
-  }
-}
-
-export default async function AboutPage() {
-  const business = await getBusiness();
-
-  const dealershipName = business?.name || "Our Dealership";
-
+export default function AboutPage() {
   return (
     <main className="min-h-screen bg-[#f7f7f5] text-black">
       {/* =========================================================
@@ -43,25 +18,14 @@ export default async function AboutPage() {
       ========================================================= */}
 
       <section className="relative h-[40dvh] min-h-[320px] overflow-hidden bg-[#e8e8e5] md:min-h-[440px]">
-        {business?.heroImage ? (
-          <Image
-            src={business.heroImage}
-            alt={dealershipName}
-            fill
-            priority
-            sizes="100vw"
-            className="object-cover"
-          />
-        ) : (
-          <Image
-            src="/images/cars/car1.jpg"
-            alt="Luxury vehicle"
-            fill
-            priority
-            sizes="100vw"
-            className="object-cover"
-          />
-        )}
+        <Image
+          src="/images/cars/car1.jpg"
+          alt="Demo vehicle"
+          fill
+          priority
+          sizes="100vw"
+          className="object-cover"
+        />
 
         {/* OVERLAY */}
         <div className="absolute inset-0 bg-black/25" />
@@ -103,8 +67,7 @@ export default async function AboutPage() {
 
             <div className="flex items-end">
               <p className="max-w-xl font-montserrat text-sm leading-7 text-black/55 md:text-base md:leading-8">
-                {business?.description ||
-                  "We're a local dealership focused on offering quality vehicles and making the car buying experience simple, straightforward and personal."}
+                This demo website showcases sample inventory and a simple vehicle-shopping experience. Replace this copy with verified business information before launch.
               </p>
             </div>
           </div>
@@ -307,7 +270,7 @@ export default async function AboutPage() {
 
               <p className="mt-6 max-w-xl font-montserrat text-sm leading-7 text-black/50 md:text-base">
                 Explore our current inventory and discover the vehicles
-                available through {dealershipName}.
+                available through Demo Auto.
               </p>
 
               <div className="mt-9 flex flex-wrap gap-3">

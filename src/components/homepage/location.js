@@ -14,7 +14,7 @@ export default function LocationSection() {
       <div className="absolute inset-0">
         <img
           src="/images/cars/car5.jpg"
-          alt="Our dealership location"
+          alt="Demo showroom experience"
           className="h-full w-full object-cover"
         />
       </div>
@@ -58,7 +58,7 @@ export default function LocationSection() {
             }}
             className="mb-6 font-montserrat text-[9px] font-medium uppercase tracking-[0.35em] text-white/55 md:mb-8 md:text-[10px]"
           >
-            Visit Our Showroom
+            Demo Showroom
           </motion.p>
 
           {/* MAIN TITLE */}
@@ -83,7 +83,7 @@ export default function LocationSection() {
             }}
             className="max-w-6xl font-bebas text-[clamp(4rem,10vw,10rem)] leading-[0.82] tracking-[-0.045em]"
           >
-            Find Us in the City
+            A Showroom Experience
           </motion.h2>
 
           {/* CTA */}
@@ -111,32 +111,16 @@ export default function LocationSection() {
             className="mt-9 md:mt-11"
           >
             <Link
-              href="https://www.google.com/maps/place/Deals+On+Wheels+Pearl/@25.3773521,51.5503474,1705m/data=!3m1!1e3!4m6!3m5!1s0x3e45c3d3e41db8a1:0x819af9489c8653e!8m2!3d25.3684533!4d51.5504525!16s%2Fg%2F11zxhjkg7y!18m1!1e1"
-              target="_blank"
-              rel="noopener noreferrer"
+              href="/cars"
               className="group inline-flex items-center gap-3 border border-white/35 bg-white px-6 py-3.5 font-montserrat text-[9px] font-medium uppercase tracking-[0.2em] text-black transition-all duration-300 hover:bg-transparent hover:text-white md:px-7 md:py-4"
             >
-              Open in Google Maps
+              Browse inventory
               <ArrowUpRight
                 size={15}
                 strokeWidth={1.3}
                 className="transition-transform duration-300 group-hover:translate-x-1 group-hover:-translate-y-1"
               />
             </Link>
-            {/* <Link
-              href="https://www.google.com/maps"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="group inline-flex items-center gap-3 border border-white/35 bg-white px-6 py-3.5 font-montserrat text-[9px] font-medium uppercase tracking-[0.2em] text-black transition-all duration-300 hover:bg-transparent hover:text-white md:px-7 md:py-4"
-            >
-              Open in Google Maps
-
-              <ArrowUpRight
-                size={15}
-                strokeWidth={1.3}
-                className="transition-transform duration-300 group-hover:translate-x-1 group-hover:-translate-y-1"
-              />
-            </Link> */}
           </motion.div>
         </div>
       </div>

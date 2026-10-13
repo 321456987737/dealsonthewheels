@@ -151,7 +151,7 @@ export default function StaffSection() {
             </p>
 
             <a
-              href="#contact"
+              href="/contact"
               className="group mt-6 inline-flex items-center gap-3 border-b border-black/20 pb-2 font-montserrat text-[9px] font-semibold uppercase tracking-[0.15em] transition-colors hover:border-black md:text-[10px]"
             >
               Meet us at the showroom
@@ -260,7 +260,7 @@ export default function StaffSection() {
         {/* CAROUSEL FOOTER */}
         <div className="mt-8 flex items-center justify-between gap-6 border-t border-black/10 pt-6">
           <p className="font-montserrat text-[8px] uppercase tracking-[0.2em] text-black/35 md:text-[9px]">
-            Deals on Wheels Qatar
+            Demo Auto · Sample team profiles
           </p>
 
           <div className="flex items-center gap-5">
@@ -486,7 +486,7 @@ export default function StaffSection() {
 //         {/* BOTTOM ACCENT */}
 //         <div className="mt-12 flex items-center justify-between border-t border-black/10 pt-6">
 //           <p className="font-montserrat text-[8px] uppercase tracking-[0.2em] text-black/30 md:text-[9px]">
-//             Deals on Wheels Qatar
+//             Demo Auto · Sample team profiles
 //           </p>
 
 //           <a
