@@ -20,7 +20,7 @@ import {
 const navLinks = [
   { href: "/", label: "Home", icon: Home },
   { href: "/cars", label: "Cars", icon: Car },
-  { href: "/models", label: "Models", icon: CarFront },
+  // { href: "/models", label: "Models", icon: CarFront },
   { href: "/services", label: "Services", icon: Wrench },
   { href: "/about", label: "About", icon: Info },
   { href: "/contact", label: "Contact", icon: Phone },
@@ -283,13 +283,13 @@ export default function Header() {
 
       <nav
         aria-label="Mobile navigation"
-        className="fixed bottom-3 left-3 right-3 z-50 h-[82px] rounded-[22px] border border-white/10 bg-[#181818]/95 shadow-[0_8px_30px_rgba(0,0,0,0.35)] backdrop-blur-xl md:hidden"
+        className="fixed  bottom-3 left-3 right-3 z-50 h-[82px] rounded-[22px] border border-white/10 bg-[#181818]/95 shadow-[0_8px_30px_rgba(0,0,0,0.35)] backdrop-blur-xl md:hidden"
         style={{
           paddingBottom:
             "max(6px, env(safe-area-inset-bottom))",
         }}
       >
-        <div className="grid h-full grid-cols-6 px-2">
+        <div className="grid h-full grid-cols-5 px-2">
           {navLinks.map((link) => {
             const Icon = link.icon;
             const active = isActive(link.href);
@@ -353,7 +353,7 @@ export default function Header() {
                     y: active ? -2 : 0,
                   }}
                   transition={navSpring}
-                  className={`mt-1.5 max-w-[58px] truncate text-center font-montserrat text-[9px] font-medium leading-none transition-colors duration-200 ${
+                  className={`mt-1.5 max-w-[58px] truncate text-center font-montserrat text-[12px] font-medium leading-none transition-colors duration-200 ${
                     active
                       ? "text-white"
                       : "text-white/40 group-hover:text-white/70"
