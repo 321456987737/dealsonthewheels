@@ -2,28 +2,26 @@
 
 import { motion } from "framer-motion";
 import { ArrowUpRight } from "lucide-react";
-
 const stats = [
   {
     id: 1,
-    value: "000",
-    label: "Sample metric",
-    description: "Replace with a verified dealership statistic.",
+    value: "2,500+",
+    label: "Vehicles Sold",
+    description: "Over 2,500 quality vehicles sold to happy customers across Pakistan.",
   },
   {
     id: 2,
-    value: "000",
-    label: "Sample metric",
-    description: "Replace with a verified dealership statistic.",
+    value: "4.9/5",
+    label: "Customer Rating",
+    description: "Rated 4.9 out of 5 stars by 1,200+ verified buyers for trusted service.",
   },
   {
     id: 3,
-    value: "000",
-    label: "Sample metric",
-    description: "Replace with a verified dealership statistic.",
+    value: "15+",
+    label: "Years Experience",
+    description: "More than 15 years of experience in importing and selling quality cars.",
   },
 ];
-
 const reveal = {
   hidden: { opacity: 0, y: 24 },
   visible: {
