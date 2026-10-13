@@ -6,20 +6,18 @@ import LocationSection from "@/components/homepage/location";
 import FAQSection from "@/components/homepage/FAQSection";
 import StaffSection from "@/components/homepage/StaffSection";
 import ReviewsSection from "@/components/homepage/ReviewsSection";
+import StatsSection from "@/components/homepage/StatsSection";
 export default function HomePage() {
   return (
     <main className="min-h-screen overflow-hidden bg-[#f7f7f5] text-[#181818]">
       <HeroSection />
-
       <BrandsStrip />
-
       <FeaturedInventory />
-
       <LatestArrivals />
       <StaffSection />
       <ReviewsSection />
+      <StatsSection />
       <LocationSection />
-
       <FAQSection />
     </main>
   );
