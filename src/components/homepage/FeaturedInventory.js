@@ -68,11 +68,11 @@ function VehicleCard({ car, index }) {
 
           <div className="absolute inset-0 bg-gradient-to-t from-black/25 via-transparent to-transparent opacity-70 transition-opacity duration-500 group-hover:opacity-100" />
 
-          <span className="absolute left-4 top-4 border border-white/35 bg-black/35 px-3 py-2 font-montserrat text-[8px] font-medium uppercase tracking-[0.18em] text-white backdrop-blur-sm">
+          <span className="absolute left-1 top-1 border border-white/35 bg-black/35 px-2 py-1 font-montserrat text-[8px] font-medium uppercase tracking-[0.18em] text-white backdrop-blur-sm">
             {car.bodyType || "Featured vehicle"}
           </span>
 
-          <span className="absolute bottom-4 right-4 flex h-10 w-10 items-center justify-center border border-white/50 bg-white text-black transition-colors duration-300 group-hover:bg-black group-hover:text-white">
+          <span className="absolute bottom-2 right-2 flex h-6 w-6 items-center justify-center border border-white/50 bg-white text-black transition-colors duration-300 group-hover:bg-black group-hover:text-white">
             <ArrowUpRight size={18} strokeWidth={1.4} />
           </span>
         </div>
@@ -262,7 +262,7 @@ useEffect(() => {
 
         {/* Loading state */}
         {status === "loading" ? (
-          <div className="grid grid-cols-1 gap-5 sm:grid-cols-2 sm:gap-6 lg:grid-cols-3 xl:grid-cols-4">
+          <div className="grid grid-cols-2 gap-5 sm:grid-cols-2 sm:gap-6 lg:grid-cols-3 xl:grid-cols-4">
             {Array.from({ length: 4 }, (_, index) => (
               <VehicleCardSkeleton key={index} />
             ))}
@@ -302,7 +302,7 @@ useEffect(() => {
           </div>
         ) : (
           /* Featured vehicles grid */
-          <div className="grid grid-cols-1 gap-5 sm:grid-cols-2 sm:gap-6 lg:grid-cols-3 xl:grid-cols-4">
+          <div className="grid grid-cols-2 gap-5 sm:grid-cols-2 sm:gap-6 lg:grid-cols-3 xl:grid-cols-4">
             {cars.slice(0, 8).map((car, index) => (
               <VehicleCard
                 key={car._id || `${car.make}-${car.model}-${index}`}

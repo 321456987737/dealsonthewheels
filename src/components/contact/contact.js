@@ -129,7 +129,7 @@ export default function ContactPage() {
 
       <section className="relative h-[40dvh] min-h-[320px] overflow-hidden bg-[#e8e8e5] md:min-h-[440px]">
         <Image
-          src={business?.heroImage || "/images/cars/car1.jpg"}
+          src={"/images/cars/car1.jpg"}
           alt="Demo vehicle contact page"
           fill
           priority

@@ -67,11 +67,11 @@ function VehicleCard({ car, index }) {
 
           <div className="absolute inset-0 bg-black/0 transition-colors duration-500 group-hover:bg-black/10" />
 
-          <span className="absolute left-4 top-4 border border-white/20 bg-black/45 px-3 py-2 font-montserrat text-[8px] font-medium uppercase tracking-[0.18em] text-white/90 backdrop-blur-sm">
+          <span className="absolute left-1 top-1 border border-white/20 bg-black/45 px-2 py-1 font-montserrat text-[8px] font-medium uppercase tracking-[0.18em] text-white/90 backdrop-blur-sm">
             {car.condition || "New arrival"}
           </span>
 
-          <span className="absolute bottom-4 right-4 flex h-10 w-10 items-center justify-center border border-white/25 bg-black/35 text-white backdrop-blur-sm transition-colors duration-300 group-hover:bg-white group-hover:text-black">
+          <span className="absolute bottom-2 right-2 flex h-6 w-6 items-center justify-center border border-white/25 bg-black/35 text-white backdrop-blur-sm transition-colors duration-300 group-hover:bg-white group-hover:text-black">
             <ArrowUpRight size={19} strokeWidth={1.4} />
           </span>
         </div>
@@ -250,7 +250,7 @@ useEffect(() => {
 
         {/* Loading state */}
         {status === "loading" ? (
-          <div className="grid grid-cols-1 gap-5 sm:grid-cols-2 sm:gap-6 lg:grid-cols-3 xl:grid-cols-4">
+          <div className="grid grid-cols-2 gap-5 sm:grid-cols-2 sm:gap-6 lg:grid-cols-3 xl:grid-cols-4">
             {Array.from({ length: 4 }, (_, index) => (
               <VehicleCardSkeleton key={index} />
             ))}
@@ -290,7 +290,7 @@ useEffect(() => {
           </div>
         ) : (
           /* Latest arrivals grid */
-          <div className="grid grid-cols-1 gap-5 sm:grid-cols-2 sm:gap-6 lg:grid-cols-3 xl:grid-cols-4">
+          <div className="grid grid-cols-2 gap-5 sm:grid-cols-2 sm:gap-6 lg:grid-cols-3 xl:grid-cols-4">
             {cars.slice(0, 8).map((car, index) => (
               <VehicleCard
                 key={
